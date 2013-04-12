@@ -98,7 +98,7 @@ a:hover {
 	cursor:pointer;
 }
 #resume:hover {
-	background:url(../images/resume-hover.png) no-repeat;
+	background:url(../images/resume.png) no-repeat -252px 0px;
 }
 #blog {
 	float:left;
@@ -109,7 +109,7 @@ a:hover {
 	cursor:pointer;
 }
 #blog:hover {
-	background:url(../images/blog-hover.png) no-repeat;
+	background:url(../images/blog.png) no-repeat -252px 0px;
 }
 #books {
 	float:left;
@@ -120,7 +120,7 @@ a:hover {
 	cursor:pointer;
 }
 #books:hover {
-	background:url(../images/books-hover.png) no-repeat;
+	background:url(../images/books.png) no-repeat -251px 0px;
 }
 #contact {
 	float:left;
@@ -131,5 +131,5 @@ a:hover {
 	cursor:pointer;
 }
 #contact:hover {
-	background:url(../images/contact-hover.png) no-repeat;
+	background:url(../images/contact.png) no-repeat -250px 0px;
 }
