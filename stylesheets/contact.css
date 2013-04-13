@@ -1,0 +1,112 @@
+/* http://meyerweb.com/eric/tools/css/reset/ 
+   v2.0 | 20110126
+   License: none (public domain)
+*/
+html, body, div, span, applet, object, iframe,
+h1, h2, h3, h4, h5, h6, p, blockquote, pre,
+a, abbr, acronym, address, big, cite, code,
+del, dfn, em, img, ins, kbd, q, s, samp,
+small, strike, strong, sub, sup, tt, var,
+b, u, i, center,
+dl, dt, dd, ol, ul, li,
+fieldset, form, label, legend,
+table, caption, tbody, tfoot, thead, tr, th, td,
+article, aside, canvas, details, embed, 
+figure, figcaption, footer, header, hgroup, 
+menu, nav, output, ruby, section, summary,
+time, mark, audio, video {
+	margin: 0;
+	padding: 0;
+	border: 0;
+	font-size: 100%;
+	font: inherit;
+	vertical-align: baseline;
+}
+/* HTML5 display-role reset for older browsers */
+article, aside, details, figcaption, figure, 
+footer, header, hgroup, menu, nav, section {
+	display: block;
+}
+body {
+	line-height: 1;
+}
+ol, ul {
+	list-style: none;
+}
+blockquote, q {
+	quotes: none;
+}
+blockquote:before, blockquote:after,
+q:before, q:after {
+	content: '';
+	content: none;
+}
+table {
+	border-collapse: collapse;
+	border-spacing: 0;
+}
+
+/* LAYOUT STYLES */
+body {
+  font-size: 15px;
+  line-height: 1.5; 
+  background: #fafafa url(../images/body-bg.jpg) 0 0 repeat;
+  font-family:\5FAE\8F6F\96C5\9ED1,arial,\5b8b\4f53,tahoma;
+  font-weight: 400;
+  color: #666;
+}
+
+a {
+  color: #9c9c9c;
+  text-decoration:none;
+}
+a:hover {
+  color: #f7685e;
+  text-decoration:none;
+}
+
+#contact {
+	width:1000px;
+	height:400px;
+	margin:0 auto;
+	position:relative;
+}
+#contact ul {
+	width:400px;
+	margin:80px auto 0;
+	height:400px;
+	background:url(../images/contact-1.png) no-repeat;
+	
+}
+#contact ul li {
+	width:200px;
+	height:200px;
+	float:left;
+}
+#contact ul li.contact-li1:hover {
+	background:url(../images/contact-2.png) no-repeat;
+}
+#contact ul li.contact-li2:hover {
+	background:url(../images/contact-2.png) no-repeat -200px 0;
+}
+#contact ul li.contact-li3:hover {
+	background:url(../images/contact-2.png) no-repeat 0 -200px;
+}
+#contact ul li.contact-li4:hover {
+	background:url(../images/contact-2.png) no-repeat -200px -200px;
+}
+#contact-text {
+	position:absolute;
+	top:185px;
+	left:355px;
+	line-height:30px;
+	width:295px;
+	text-align:center;
+	font-size:16px;
+}
+
+#contact-back {
+	height:40px;
+	margin-top:40px;
+	text-align:center;
+}
