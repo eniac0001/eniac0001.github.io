@@ -1,0 +1,385 @@
+/* http://meyerweb.com/eric/tools/css/reset/ 
+   v2.0 | 20110126
+   License: none (public domain)
+*/
+html, body, div, span, applet, object, iframe,
+h1, h2, h3, h4, h5, h6, p, blockquote, pre,
+a, abbr, acronym, address, big, cite, code,
+del, dfn, em, img, ins, kbd, q, s, samp,
+small, strike, strong, sub, sup, tt, var,
+b, u, i, center,
+dl, dt, dd, ol, ul, li,
+fieldset, form, label, legend,
+table, caption, tbody, tfoot, thead, tr, th, td,
+article, aside, canvas, details, embed, 
+figure, figcaption, footer, header, hgroup, 
+menu, nav, output, ruby, section, summary,
+time, mark, audio, video {
+	margin: 0;
+	padding: 0;
+	border: 0;
+	font-size: 100%;
+	font: inherit;
+	vertical-align: baseline;
+}
+/* HTML5 display-role reset for older browsers */
+article, aside, details, figcaption, figure, 
+footer, header, hgroup, menu, nav, section {
+	display: block;
+}
+body {
+	line-height: 1;
+}
+ol, ul {
+	list-style: none;
+}
+blockquote, q {
+	quotes: none;
+}
+blockquote:before, blockquote:after,
+q:before, q:after {
+	content: '';
+	content: none;
+}
+table {
+	border-collapse: collapse;
+	border-spacing: 0;
+}
+
+/* LAYOUT STYLES */
+body {
+  font-size: 15px;
+  line-height: 1.5; 
+  background: #fafafa url(../images/body-bg.jpg) 0 0 repeat;
+  font-family:\5FAE\8F6F\96C5\9ED1,arial,\5b8b\4f53,tahoma;
+  font-weight: 400;
+  color: #666;
+}
+
+a {
+  color: #9c9c9c;
+  text-decoration:none;
+}
+a:hover {
+  color: #b78400;
+  text-decoration:none;
+}
+
+#header {
+	width:1000px;
+	margin:10px auto;
+	height:140px;
+	background:url(../images/face.png) no-repeat center 0;
+	color:#9c9c9c;
+}
+#face {
+	float:left;
+	width:500px;
+	height:140px;
+	overflow:hidden;
+}
+#contact {
+	float:right;
+	margin-top:50px;
+	width:500px;
+	text-align:right;
+	font-size:14px;
+}
+#contact ul li {
+	height:30px;
+	line-height:30px;
+}
+#social-0 {
+	float:right;
+}
+#social-1 {
+	height:30px;
+	width:30px;
+	float:right;
+	background:url(../images/social.png) no-repeat;
+}
+#social-2 {
+	height:30px;
+	width:30px;
+	float:right;
+	background:url(../images/social.png) no-repeat -30px 0;
+}
+#social-3 {
+	height:30px;
+	width:30px;
+	float:right;
+	background:url(../images/social.png) no-repeat -60px 0;
+}
+#social-4 {
+	height:30px;
+	width:30px;
+	float:right;
+	background:url(../images/social.png) no-repeat -90px 0;
+}
+#social-1:hover {
+	background:url(../images/social.png) no-repeat 0px -30px;
+	cursor:pointer;
+}
+#social-2:hover {
+	background:url(../images/social.png) no-repeat -30px -30px;
+	cursor:pointer;
+}
+#social-3:hover {
+	background:url(../images/social.png) no-repeat -60px -30px;
+	cursor:pointer;
+}
+#social-4:hover {
+	background:url(../images/social.png) no-repeat -90px -30px;
+	cursor:pointer;
+}
+.resume-left {
+	float:left;
+	width:190px;
+	overflow:hidden;
+}
+.both {
+	clear:both;
+	width:1000px;
+	height:1px;
+}
+#basic-info {
+	clear:both;
+	width:1000px;
+	margin:30px auto 0;
+}
+.info-header {
+	height:30px;
+	line-height:30px;
+	font-size:16px;
+	color:#b78400;
+	background:url(../images/line.png) repeat-x 0 bottom;
+}
+.info-header ul li {
+	text-indent:40px;
+	background:url(../images/info-header.png) no-repeat;
+}
+#info {
+	width:810px;
+	height:140px;
+	float:right;
+	
+}
+#info ul li {
+	float:left;
+	width:270px;
+	height:50px;
+	line-height:50px;
+	text-indent:60px;
+	margin:10px 0;
+}
+#info ul li#info_name {
+	background:url(../images/resume-icon.png) no-repeat 0 0;
+	overflow:hidden;
+	
+}
+#info ul li#info_phone {
+	background:url(../images/resume-icon.png) no-repeat 0 -50px;
+	overflow:hidden;	
+}
+#info ul li#info_birth {
+	background:url(../images/resume-icon.png) no-repeat 0 -100px;
+	overflow:hidden;	
+}
+#info ul li#info_work {
+	background:url(../images/resume-icon.png) no-repeat 0 -250px;
+	overflow:hidden;	
+}
+#info ul li#info_email {
+	background:url(../images/resume-icon.png) no-repeat 0 -200px;
+	overflow:hidden;	
+}
+#info ul li#info_net {
+	background:url(../images/resume-icon.png) no-repeat 0 -150px;
+	overflow:hidden;	
+}
+
+#tech-info {
+	clear:both;
+	width:1000px;
+	margin:30px auto 0;
+}
+#technology {
+	width:810px;
+	margin-left:50px;
+	float:right;
+	color:#555;
+	padding-top:10px;
+}
+#technology ul li {
+	line-height:30px;
+	text-indent:30px;
+	background:url(../images/ul-li.png) no-repeat 0 3px;
+}
+#expe {
+	clear:both;
+	width:1000px;
+	margin:30px auto 0;
+}
+.resume-expe-left {
+	float:left;
+	width:180px;
+	overflow:hidden;
+}
+.resume-expe-left ul {
+	margin-top:8px;
+	padding-left:130px;
+}
+.resume-expe-left ul li {
+	height:120px;
+}
+.resume-expe-left ul li span {
+	color:#b78400;
+	font-weight:bold;
+}
+#expe-content {
+	width:820px;
+	color:#555;
+	float:right;
+}
+#expe-header {
+	width:820px;
+	height:20px;
+	background:url(../images/time-line.png) no-repeat 0 2px;
+}
+#expe-content ul {
+	background:url(../images/time.png) repeat-y;
+	height:480px;
+	width:820px;
+}
+#expe-content ul li {
+	padding-left:60px;
+	background:url(../images/expe-spide.png) no-repeat;
+}
+#expe-content ul li#expe-content-1 {
+	height:60px;
+	padding-top:60px;
+	background-position:20px 70px;
+}
+#expe-content ul li#expe-content-2 {
+	height:60px;
+	padding-top:60px;
+	background-position:20px 70px;
+}
+#expe-content ul li#expe-content-3 {
+	height:95px;
+	padding-top:25px;
+	background-position:20px 60px;
+}
+#expe-content ul li#expe-content-4 {
+	height:120px;
+	padding-top:0px;
+	background-position:20px 35px;
+}
+#expe-footer {
+	width:820px;
+	height:20px;
+	background:url(../images/time-line.png) no-repeat 0 -30px;
+}
+#study {
+	clear:both;
+	width:1000px;
+	margin:0 auto;
+	color:#9c9c9c;
+}
+#study-left {
+	width:130px;
+	float:left;
+}
+#study-header {
+	width:870px;
+	height:60px;
+}
+#sh-left {
+	width:60px;
+	height:60px;
+	background:url(../images/study-header.png) no-repeat 0 30px;
+	float:left;
+}
+#sh-postgradute {
+	width:105px;
+	float:left;
+	height:37px;
+	border-bottom:6px solid #b78400;
+}
+.sh-year {
+	height:33px;
+	width:50px;
+	float:left;
+	text-align:center;
+	padding-top:27px;
+	font-size:16px;
+	color:#b78400;
+	font-weight:bold;
+}
+#sh-university {
+	width:280px;
+	float:left;
+	height:37px;
+	border-bottom:6px solid #b78400;
+}
+#sh-highschool {
+	width:205px;
+	float:left;
+	height:37px;
+	border-bottom:6px solid #b78400;
+}
+#sh-right {
+	width:60px;
+	height:60px;
+	background:url(../images/study-header.png) no-repeat -60px 30px;
+	float:left;
+}
+#study-content {
+	width:870px;
+	float:right;
+}
+#study-content-1 {
+	width:150px;
+	float:left;
+	padding:20px 20px;
+	text-align:center;
+	line-height:30px;
+}
+#study-content-2 {
+	width:150px;
+	float:left;
+	padding:20px 90px;
+	text-align:center;
+	line-height:30px;
+}
+#study-content-3 {
+	width:150px;
+	float:left;
+	text-align:center;
+	padding:20px 52px;
+	line-height:30px;
+}
+#comment {
+	clear:both;
+	width:1000px;
+	margin:0 auto;
+}
+#comment-left {
+	width:130px;
+	float:left;
+}
+#comment-right {
+	width:870px;
+	height:100px;
+	float:right;
+	line-height:30px;
+	padding-top:30px;
+}
+
+
+#bottom {
+	clear:both;
+	text-align:center;
+	padding:50px 0;
+	color:#c6c6c6;
+}
