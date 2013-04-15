@@ -187,7 +187,27 @@ a:hover {
 }
 #info ul li#info_work {
 	background:url(../images/resume-icon.png) no-repeat 0 -250px;
-	overflow:hidden;	
+	overflow:hidden;
+	
+}
+.info-work1 {
+	width:115px;
+	line-height:25px;
+	text-indent:0;
+	height:50px;
+	display:block;
+	margin-left:60px;
+	float:left;
+}
+.info-work2 {
+	float:left;
+	width:20px;
+	display:block;
+	height:50px;
+	line-height:50px;
+	text-indent:0;
+	color:#b78400;
+	font-weight:bold;
 }
 #info ul li#info_email {
 	background:url(../images/resume-icon.png) no-repeat 0 -200px;

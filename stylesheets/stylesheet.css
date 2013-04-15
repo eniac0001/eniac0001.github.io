@@ -97,6 +97,7 @@ a:hover {
 	overflow:hidden;
 	cursor:pointer;
 }
+
 #resume:hover {
 	background:url(../images/resume.png) no-repeat -252px 0px;
 }
