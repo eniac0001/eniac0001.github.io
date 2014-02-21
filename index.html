@@ -6,153 +6,334 @@
 	<meta name="description" content="Personal Site" />
 	<link rel="shortcut icon" id="favicon" href="http://woerwosi.com/blog/favicon.png">
 	<meta name="author" content="VictoryZhang">
-	<script type="text/javascript">
-		
-		console.log(window.performance.timing.loadEventEnd - window.performance.timing.loadEventStart)
-		
-	</script>
-	<link href='css/onepage-scroll.css' rel='stylesheet' type='text/css'>
-	<style type="text/css">
-
-		.header {
-			position: fixed;
-			top: 4%;
-			left: 5%;
-			z-index: 99;
-		}
-
-		.header .logo {
-			display: block;
-			float: left;
-			width: 150px;
-			height: 77px;
-		}
-
-		.header .nav {
-			display: block;
-			margin-top: 25px;
-			margin-left: 45px;
-			float: left;
-			width: 25px;
-			height: 25px;
-			vertical-align: middle;
-			opacity: 1;
-			-webkit-animation: blank-fade 6s linear infinite;
-			animation: blank-fade 6s linear infinite;
-		}
-
-		.header .menu {
-			float: left;
-			display: none;
-		}
-		.header .menu li {
-			float: left;
-			list-style: none;
-			margin: 0 25px;
-		}
-		.header .menu li a {
-			color: #fff;
-			display: block;
-			text-decoration: none;
-			font-family: Arial;
-			font-size: 20px;
-			padding: 8px 30px;
-			border: 2px solid #fff;
-			border-radius: 10px;
-		}
-		.header .menu li a:hover {
-			transition:all 1s;
-			border-color: #b78400;
-			color: #b78400;
-			
-		}
-
-		.wrapper {
-	    	height: 100% !important;
-	    	height: 100%;
-	    	margin: 0 auto; 
-	    	overflow: hidden;
-	    }
-
-		section {
-    		background: #fff;
-    	}
-
-    	.footer {
-    		position: absolute;
-    		bottom: 0;
-    		left: 5%;
-    		line-height: 25px;
-    		color: #cdcdcd;
-    		font-size: 14px;
-    		font-family: Arial;
-    	}
-    	.footer p {
-    		margin: 0;
-    	}
-
-	</style>
-	
+	<link href='http://static-woerwosi.qiniudn.com/stylesheets/2014/normalize.css' rel='stylesheet' type='text/css'>
+	<link href='http://static-woerwosi.qiniudn.com/stylesheets/2014/index_css.css' rel='stylesheet' type='text/css'>
+	<link href='http://static-woerwosi.qiniudn.com/stylesheets/2014/onepage-scroll.css' rel='stylesheet' type='text/css'>	
 </head>
 <body>
 
-	<div class="header">
-		<img class="logo" src="images/woerwosi.png" alt="woerwosi" />
-		<img class="nav" src="images/nav-right.png" alt="nav" />
-		<ul class="menu">
-			<li><a href="resume/" title="Resume">RESUME</a></li>
-			<li><a href="http://woerwosi.com/blog/" title="Blog">BLOG</a></li>
-			<li><a href="books/" title="Books">BOOKS</a></li>
-			<li><a href="contact/" title="Contact">CONTACT</a></li>
-		</ul>
+	<div class="loading">
+		<div class="waitContent">
+			<img src="http://static-woerwosi.qiniudn.com/images/2014/textLogo.png" alt="Logo" />
+			<div id="loadingTip">
+				<img src="http://static-woerwosi.qiniudn.com/images/2014/loading.gif" class="loadingImg" alt="Loading" />
+			</div>
+		</div>
 	</div>
 
-	<div class="wrapper">
+	<script type="text/javascript">
 
-		<div class="main">
+		// 位置还需要再考虑
+		var ua = navigator.userAgent;
+		// 判断手机访问
+		var mobile = !!ua.match(/(iPhone|iPod|iPad|Android|BlackBerry|Windows Phone)/);
+		var mobile_flag = false;
+		if(mobile) {
+			// mobile Tip
+			document.getElementById('loadingTip').innerHTML = '您当前使用的是手机访问，为了您得到更好的体验建议使用电脑访问；<span id="mobile"><a href="#">继续使用手机浏览</a></span>';
+		} else {
+			mobile_flag = true;
+		}
+		function loadingTip() {
+			document.getElementById('loadingTip').innerHTML = "";
+			mobile_flag = true;
+		}
+		var addEvent = function(object, event, func){
+			object = object || window.document;
+			if(window.attachEvent) {
+				object.attachEvent('on' + event, func); 
+			} else {
+				object.addEventListener(event, func, false); 
+			}
+		};
+		addEvent(document.getElementById('mobile'), 'click', loadingTip);
 
-			<section class="page1">
+
+		// 判断浏览器版本，
+		// 1、Firefox判断chrome 出问题；
+		//ua = ua.toLowerCase();
+		var Sys = {};
+		var version_flag = false;
+		if(window.opera) {
+			Sys.opera = parseFloat(window.opera.version());
+			if(Sys.opera >= 18) {
+        		version_flag = true;
+        	}
+		} else if (/AppleWebKit\/(\S+)/.test(ua)){
+			if (/Chrome\/(\S+)/.test(ua)){
+				Sys.chrome = parseFloat(RegExp["$1"]);
+				if(Sys.chrome >= 28) {
+	        		version_flag = true;
+	        	}
+			} else {
+				Sys.safari = parseFloat(RegExp["$1"]);
+				if(Sys.safari >= 6) {
+	        		version_flag = true;
+	        	}
+			}
+		} else if (/rv:([^\)]+)\) Gecko\/\d{8}/.test(ua)){
+			if (/Firefox\/(\S+)/.test(ua)){
+				Sys.firefox = parseFloat(RegExp["$1"]);
+				if(Sys.firefox >= 26) {
+	        		version_flag = true;
+	        	}
+			}
+		} else if(/MSIE ([^;]+)/.test(ua)) {
+			Sys.ie = parseFloat(RegExp["$1"]);
+			if(Sys.ie >= 9) {
+        		version_flag = true;
+        	}
+		} else {
+			version_flag = true;
+		}
+
+        // 当是手机浏览时，不判断版本
+        if(mobile) {
+        	version_flag = true;
+        }
+        if(!version_flag) {
+        	document.getElementById('loadingTip').innerHTML = '您当前使用的浏览器版本过低，请先升级您的浏览器；<span class="version"><a href="https://www.google.com/intl/zh-CN/chrome/browser/" title="谷歌浏览器">下载最新版谷歌浏览器</a></span>';
+        }
+
+	</script>
+
+	<div id="wrapper">
+	
+		<div id="header">
+			<div id="headerBg"></div>
+			<div id="headerContent">
+				<div class="logo">
+					<img src="http://static-woerwosi.qiniudn.com/images/2014/Logo.jpg" alt="Logo" data-index="1" />
+				</div>
+				<div class="headerTip"></div>
+				<div class="menu">
+					<ul>
+						<li><a href="#2" data-index="2">Blog</a></li>
+						<li><a href="#3" data-index="3">Resume</a></li>
+						<li><a href="#4" data-index="4">Books</a></li>
+						<li><a href="#5" data-index="5">About</a></li>
+					</ul>
+				</div>
+				<div class="social">
+					<div class="social_tip"></div>
+				</div>
+				<div class="social_icon">
+					<ul>
+						<li><a href="http://weibo.com/512364662" title="新浪微博"><span style="background-position:-3px 0px" class="gb_g"></span><span>SINA</span></a></li>
+						<li><a href="mailto:china.public.victory@gmail.com" title="MAIL"><span style="background-position:-3px -68px" class="gb_g"></span><span>MAIL</span></a></li>
+						<li><a href="http://linkin.com" title="Linkin"><span style="background-position:-3px -136px" class="gb_g"></span><span>LINKIN</span></a></li>
+						<li><a href="http://plus.google.com/" title="Google+"><span style="background-position:-3px -210px" class="gb_g"></span><span>GOOGLE+</span></a></li>
+						<li><a href="http://twitter.com/" title="Twitter"><span style="background-position:-3px -346px" class="gb_g"></span><span>TWITTER</span></a></li>
+						<li><a href="http://www.facebook.com/" title="Facebook"><span style="background-position:-3px -278px" class="gb_g"></span><span>FACEBOOK</span></a></li>
+					</ul>
+				</div>
+			</div>
+		</div>
+
+		<div id="main">
+			<div class="page page1">
 				<div class="page_container">
-					<img src="images/001001001.jpg" alt="" />
+					<img src="http://static-woerwosi.qiniudn.com/images/2014/001001001.jpg" alt="" />
 				</div>
-				
-			</section>
+				<div class="index_page">
+					<div class="ip_content">
+						<img src="http://static-woerwosi.qiniudn.com/images/2014/index_slogan.png" alt="woerwosi" />
+						<img src="http://static-woerwosi.qiniudn.com/images/2014/textLogo.png" alt="woerwosi" />
+					</div>
+				</div>
+			</div>
 
-			<section class="page2">
+			<div class="page page2">
 				<div class="page_container">
-					<img src="images/010010010.jpg" alt="" />
+					<img src="http://static-woerwosi.qiniudn.com/images/2014/010010010.jpg" alt="" />
 				</div>
-			</section>
+				<div class="index_page">
+					<div class="ip_content">
+						<div class="proverb"><h1>微言微语：</h1><div>如果我不联系你，你也不联系我，是不是总有一天，我们终将成为陌生人？</div></div>
+						<a href="http://woerwosi.com/blog/"><img src="http://static-woerwosi.qiniudn.com/images/2014/blog_enter.png" alt="enter" /></a>
+					</div>
+				</div>
+			</div>
 
-			<section class="page3">
+			<div class="page page3">
 				<div class="page_container">
-					<img src="images/100100100.jpg" alt="" />
+					<img src="http://static-woerwosi.qiniudn.com/images/2014/010010011.jpg" alt="" />
 				</div>
-				<div class="page_container1">
-					<img src="http://woerwosi.qiniudn.com/textLogo.png" alt="" />
+				<div class="index_page">
+					<div class="ip_content">
+						<ul>
+							<li><span>JAVA</span></li>
+							<li><span>JS</span></li>
+							<li><span>CSS</span></li>
+							<li><span>C</span></li>
+							<li><span>Adobe</span></li>
+							<li><span>...</span></li>
+						</ul>
+						<form action="#" method="GET">
+							<input type="text" id="resumeValue" name="enter" placeholder="请输入访问码" value="" />
+							<span>进入</span>
+						</form>
+						<div class="resumeTip">访问码是您查看简历的凭证！在所投简历的显著位置已注明，另外，您也可通过邮件(admin@woerwosi.com)的方式获取！访问码采用MD5加密，不定期更改！</div>
+					</div>
 				</div>
-			</section>
-			
+			</div>
 
+			<div class="page page4">
+				<div class="page_container">
+					<img src="http://static-woerwosi.qiniudn.com/images/2014/010010100.jpg" alt="" />
+				</div>
+				<div class="index_page">
+					<div class="ip_content">
+						<ul>
+							<li><a href="#"></a></li>
+							<li><a href="#"></a></li>
+							<li><a href="#"></a></li>
+							<li><a href="#"></a></li>
+						</ul>
+						<a href="http://book.douban.com/" title="">读书，遇见更好的自己</a>
+					</div>
+				</div>
+			</div>
+
+			<div class="page page5">
+				<div class="page_container">
+					<img src="http://static-woerwosi.qiniudn.com/images/2014/010010101.jpg" alt="" />
+				</div>
+				<div class="index_page">
+					<div class="ip_content">
+						<ul>
+							<li><a href="http://weibo.com/512364662">SINA</a></li>
+							<li><a href="http://www.cnblogs.com/">CNBLOG</a></li>
+							<li><a href="http://www.csdn.net/">CSDN</a></li>
+							<li><a href="http://www.github.com/">GITHUB</a></li>
+							<li><a href="http://plus.google.com/">GOOGLE+</a></li>
+							<li><a href="http://www.linkin.com/">LINKIN</a></li>
+							<li><a href="http://www.twitter.com/">TWITTER</a></li>
+							<li><a href="http://www.facebook.com">FACEBOOK</a></li>
+						</ul>
+					</div>
+				</div>
+			</div>
+		</div>
+
+		<div id="mainLeft">
+			<div class="mlContent">
+				<div class="mlTop"></div>
+				<div class="mlCenter">
+					<div class="mlCenterBg"></div>
+					<ul>
+						<li><a href="#" title=""></a></li>
+						<li><a href="#" title=""></a></li>
+						<li><a href="#" title=""></a></li>
+						<li><a href="#" title=""></a></li>
+						<li><a href="#" title=""></a></li>
+						<li><a href="#" title=""></a></li>
+						<li><a href="#" title=""></a></li>
+						<li><a href="#" title=""></a></li>
+						<li><a href="#" title=""></a></li>
+						<li><a href="#" title=""></a></li>
+						<li><a href="#" title=""></a></li>
+						<li><a href="#" title=""></a></li>
+					</ul>
+				</div>
+				<div class="mlBottom"></div>
+			</div>
+		</div>
+
+		<div id="footer">
+			<div class="footerContent">
+				Copyright &copy; 2014 woerwosi.com. All Rights Reserved.
+			</div>
 		</div>
 
 	</div>
 
-	<div class="footer">
-		<p>Copyright &copy; 2013. woerwosi.com</p>
-	</div>
+	<script type="text/javascript" src="http://static-woerwosi.qiniudn.com/javascripts/2014/jquery-1.9.1.min.js"></script>
+	<script type="text/javascript" src="http://static-woerwosi.qiniudn.com/javascripts/2014/jquery.woerwosi-page-scroll.js"></script>
+	<script type="text/javascript" src="http://static-woerwosi.qiniudn.com/javascripts/2014/md5.js"></script>
 
-	<script type="text/javascript" src="http://code.jquery.com/jquery-1.9.1.js"></script>
-	<script type="text/javascript" src="javascripts/jquery.onepage-scroll.js"></script>
+
 	<script type="text/javascript">
 
 		$(document).ready(function(){
-    		$(".main").onepage_scroll({
-    			sectionContainer: "section"
+
+    		$("#main").onepage_scroll({
+    			sectionContainer: ".page"
+     		});
+     		if(mobile_flag && version_flag) {
+     			$('.loading').fadeOut();
+				//setTimeOut(1000);
+				$('#wrapper').show();
+     		}
+
+     		// MainLeft Click Event
+     		$('.mlCenter li').each(function(index){
+     			$(this).find('a').click(function(){
+     				if($('.headerTip').css("opacity") == 0) {
+     				    $('.headerTip').css("opacity", 1).html("<span>相关功能正在开发中...</span>").animate({"opacity": 0}, 3000, function(){$('.headerTip').html("")});
+     				}
+     				else {
+     					return false;
+     				}
+     			});
      		});
 			
-		});	
+		});
 	</script>
+
+	<script type="text/javascript">
+
+	$(document).ready(function(){
+
+		$('#header .social').click(function(){
+			if($('#header .social_icon').is(":visible")) {
+				$('#header .social_icon, #header .social_tip').fadeOut();
+				$(this).removeClass('active');
+			} else {
+				$('#header .social_icon, #header .social_tip').fadeIn();
+				$(this).addClass('active');
+			}
+			return false;
+		});
+
+		$('body').click(function(){
+			if($('#header .social_icon').is(":visible")) {
+				$('#header .social_icon, #header .social_tip').fadeOut();
+				$('#header .social').removeClass('active');
+			}
+			//return false;
+		});
+
+		$('.page3 .ip_content form span').click(function(){
+
+			var inputValue = $('#resumeValue').val().toString();
+			if(inputValue === "") {
+				$('.resumeTip').html("请输入访问码！");
+				setInterval(function(){
+					$('.resumeTip').html("访问码是您查看简历的凭证！在所投简历的显著位置已注明，另外，您也可通过邮件(admin@woerwosi.com)的方式获取！访问码采用MD5加密，不定期更改！");
+				},3000);
+			} else {
+				if(CryptoJS.MD5(inputValue).words.join("").toString() === '20284172822106578190-7003043732090492851') {
+					// success
+					//document.addCookie("woerwosiResume=" + inputValue);
+					document.cookie = "woerwosiResume=" + CryptoJS.MD5(inputValue).words.join("").toString();
+					$('.resumeTip').html("").hide();
+					//alert(document.cookie.split(";")["woerwosiResume"]);
+					window.location.href = "http://woerwosi.com/resume/?woerwosiResume=" + CryptoJS.MD5(inputValue).words.join("").toString();
+				} else {
+					// failure
+					$('.resumeTip').html("访问码不正确，请重新输入！");
+					setInterval(function(){
+						$('.resumeTip').html("访问码是您查看简历的凭证！在所投简历的显著位置已注明，另外，您也可通过邮件(admin@woerwosi.com)的方式获取！访问码采用MD5加密，不定期更改！");
+					},3000);
+				}
+			}
+
+		});
+	});
+
+	</script>
+
 
 </body>
 </html>
