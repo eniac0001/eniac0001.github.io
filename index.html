@@ -29,7 +29,7 @@
 		var mobile_flag = false;
 		if(mobile) {
 			// mobile Tip
-			document.getElementById('loadingTip').innerHTML = '您当前使用的是手机访问，为了您得到更好的体验建议使用电脑访问；<span id="mobile"><a href="#">继续使用手机浏览</a></span>';
+			document.getElementById('loadingTip').innerHTML = '您当前使用的是手机访问，由于本网站的特殊效果请使用电脑访问！';
 		} else {
 			mobile_flag = true;
 		}
@@ -260,19 +260,11 @@
     			sectionContainer: ".page"
      		});
 
-    		if(!mobile_flag) {
-    			$('#mobile').click(function(){
-    				$('.loading').fadeOut();
-					//setTimeOut(1000);
-					$('#wrapper').show();
-    			});
-    		} else {
-    			if(version_flag) {
-    				$('.loading').fadeOut();
-					//setTimeOut(1000);
-					$('#wrapper').show();
-    			}
-    		}
+			if(mobile_flag && version_flag) {
+				$('.loading').fadeOut();
+				//setTimeOut(1000);
+				$('#wrapper').show();
+			}
 
      		// MainLeft Click Event
      		$('.mlCenter li').each(function(index){
