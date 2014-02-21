@@ -22,12 +22,34 @@
 	</div>
 
 	<script type="text/javascript">
+		// http://www.geekpedia.com/code100_Get-window-width-and-height.html
+		function GetWidth()
+		{
+		    var x = 0;
+		    if (self.innerHeight)
+		    {
+		        x = self.innerWidth;
+		    }
+		    else if (document.documentElement && document.documentElement.clientHeight)
+		    {
+		        x = document.documentElement.clientWidth;
+		    }
+		    else if (document.body)
+		    {
+		        x = document.body.clientWidth;
+		    }
+		    return x;
+		}
 
 		var ua = navigator.userAgent;
 		// 判断手机访问
 		var mobile = !!ua.match(/(iPhone|iPod|iPad|Android|BlackBerry|Windows Phone)/);
 		var mobile_flag = false;
-		if(mobile) {
+		// 当浏览器宽度大于700时，设置mobile_flag为true
+		if(GetWidth() >= 700) {
+			mobile_flag = true;
+		}
+		if(mobile && !mobile_flag) {
 			// mobile Tip
 			document.getElementById('loadingTip').innerHTML = '您当前使用的是手机访问，由于本网站的特殊效果请使用电脑访问！';
 		} else {
@@ -47,6 +69,7 @@
 			}
 		};
 		addEvent(document.getElementById('mobile'), 'click', loadingTip);
+
 
 		// 判断浏览器版本
 		var Sys = {};
@@ -257,7 +280,7 @@
     		$("#main").onepage_scroll({
     			sectionContainer: ".page"
      		});
-
+    		
 			if(mobile_flag && version_flag) {
 				$('.loading').fadeOut();
 				//setTimeOut(1000);
@@ -334,8 +357,6 @@
 	<script type="text/javascript">
 var _bdhmProtocol = (("https:" == document.location.protocol) ? " https://" : " http://");
 document.write(unescape("%3Cscript src='" + _bdhmProtocol + "hm.baidu.com/h.js%3F12ea0613a43d2c81fb26266aa028e6f2' type='text/javascript'%3E%3C/script%3E"));
-</script>
-
-
+	</script>
 </body>
 </html>

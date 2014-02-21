@@ -1,0 +1,122 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset='utf-8'>
+    <meta http-equiv="X-UA-Compatible" content="chrome=1">
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+    <title>Enter Password</title>
+    <style type="text/css">
+
+    body {
+      margin: 0 ;padding: 0;background-color: #e67d03;
+    }
+    .logo {
+    	width: 500px;
+    	margin: 50px auto;
+    }
+    ::-webkit-input-placeholder { /* WebKit browsers */
+	    color: #e5e5e5;
+	}
+	:-moz-placeholder { /* Mozilla Firefox 4 to 18 */
+	    color: #e5e5e5;
+	}
+	::-moz-placeholder { /* Mozilla Firefox 19+ */
+	    color: #e5e5e5;
+	}
+	:-ms-input-placeholder { /* Internet Explorer 10+ */
+	    color: #e5e5e5;
+	}
+    form {
+	  clear: both;
+	  margin-top: 65px;
+	}
+	form {
+		width: 450px;
+		margin: 0 auto;
+	}
+	form input {
+	  background-color: transparent;
+	  border: 0;
+	  border-bottom: 2px solid rgba(255, 255, 255, .8);
+	  line-height: 35px;
+	  color: #e5e5e5;
+	  width: 380px;
+	  font-size: 16px;
+	  opacity: 0.8;
+	  filter:alpha(opacity=80);
+	  outline: none;
+	  padding-left: 10px;
+	  font-family: \5FAE\8F6F\96C5\9ED1,arial,\5b8b\4f53,tahoma;
+	}
+	form span {
+	  color: #fff;
+	  cursor: pointer;
+	  display: inline-block;
+	  width: 40px;
+	  filter:alpha(opacity=80);
+	  opacity: 0.8;
+	  background: url("http://static-woerwosi.qiniudn.com/images/2014/send.png") no-repeat 0 -10px;
+	  text-indent: -999em;
+	  height: 35px;
+	}
+	.resumeTip {
+	  display: none;
+	  width: 420px;
+	  text-align: center;
+	  margin: 20px auto 0;
+	  border: 1px solid #e9e9e9;
+	  border-radius: 80px;
+	  background-color: rgba(0, 0, 0, .2);
+	  color: #e9e9e9;
+	  font-family: \5FAE\8F6F\96C5\9ED1,arial,\5b8b\4f53,tahoma;
+	  line-height: 40px; 
+	}
+	.resumeTip a {
+	  color: #e67e03;
+	  text-decoration: none;
+	}
+
+    </style>
+  </head>
+
+  <body>
+
+    <div class="logo"><img src="http://static-woerwosi.qiniudn.com/images/2014/textLogo.png" alt="Logo" data-index="1" /></div>
+    <form action="#" method="GET">
+		<input type="text" id="resumeValue" name="enter" placeholder="请输入访问码" value="" />
+		<span>进入</span>
+	</form>
+	<div class="resumeTip"></div>
+
+
+	<script type="text/javascript" src="http://static-woerwosi.qiniudn.com/javascripts/2014/jquery-1.9.1.min.js"></script>
+	<script type="text/javascript" src="http://static-woerwosi.qiniudn.com/javascripts/2014/md5.js"></script>
+	<script type="text/javascript">
+
+	$(document).ready(function(){
+		$('form span').click(function(){
+
+			var inputValue = $('#resumeValue').val().toString();
+			if(inputValue === "") {
+				$('.resumeTip').html("请输入访问码！").fadeIn();
+			} else {
+				if(CryptoJS.MD5(inputValue).words.join("").toString() === '20284172822106578190-7003043732090492851') {
+					// success
+					//document.addCookie("woerwosiResume=" + inputValue);
+					document.cookie = "woerwosiResume=" + CryptoJS.MD5(inputValue).words.join("").toString();
+					$('.resumeTip').html("").hide();
+					//alert(document.cookie.split(";")["woerwosiResume"]);
+					window.location.href = "http://woerwosi.com/resume/?woerwosiResume=" + CryptoJS.MD5(inputValue).words.join("").toString();
+				} else {
+					// failure
+					$('.resumeTip').html("访问码不正确，请重新输入！").fadeIn();
+				}
+			}
+
+		});
+	});
+
+	</script>
+
+  </body>
+</html>
