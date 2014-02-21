@@ -23,7 +23,6 @@
 
 	<script type="text/javascript">
 
-		// 位置还需要再考虑
 		var ua = navigator.userAgent;
 		// 判断手机访问
 		var mobile = !!ua.match(/(iPhone|iPod|iPad|Android|BlackBerry|Windows Phone)/);
@@ -37,6 +36,7 @@
 		function loadingTip() {
 			document.getElementById('loadingTip').innerHTML = "";
 			mobile_flag = true;
+			console.log(mobile_flag)
 		}
 		var addEvent = function(object, event, func){
 			object = object || window.document;
@@ -47,7 +47,6 @@
 			}
 		};
 		addEvent(document.getElementById('mobile'), 'click', loadingTip);
-
 
 		// 判断浏览器版本，
 		// 1、Firefox判断chrome 出问题；
@@ -260,11 +259,20 @@
     		$("#main").onepage_scroll({
     			sectionContainer: ".page"
      		});
-     		if(mobile_flag && version_flag) {
-     			$('.loading').fadeOut();
-				//setTimeOut(1000);
-				$('#wrapper').show();
-     		}
+
+    		if(!mobile_flag) {
+    			$('#mobile').click(function(){
+    				$('.loading').fadeOut();
+					//setTimeOut(1000);
+					$('#wrapper').show();
+    			});
+    		} else {
+    			if(version_flag) {
+    				$('.loading').fadeOut();
+					//setTimeOut(1000);
+					$('#wrapper').show();
+    			}
+    		}
 
      		// MainLeft Click Event
      		$('.mlCenter li').each(function(index){
