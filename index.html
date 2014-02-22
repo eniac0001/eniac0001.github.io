@@ -47,7 +47,8 @@
 		var mobile_flag = false;
 		// 当浏览器宽度大于700时，设置mobile_flag为true
 		if(GetWidth() >= 700) {
-			mobile_flag = true;
+			//mobile_flag = true;
+			console.log("width: " + GetWidth());
 		}
 		if(mobile && !mobile_flag) {
 			// mobile Tip
@@ -58,7 +59,6 @@
 		function loadingTip() {
 			document.getElementById('loadingTip').innerHTML = "";
 			mobile_flag = true;
-			console.log(mobile_flag)
 		}
 		var addEvent = function(object, event, func){
 			object = object || window.document;
@@ -76,30 +76,35 @@
 		var version_flag = false;
 		if(window.opera) {
 			Sys.opera = parseFloat(window.opera.version());
+			console.log("Opera Version: " + Sys.opera);
 			if(Sys.opera >= 18) {
         		version_flag = true;
         	}
 		} else if (/AppleWebKit\/(\S+)/.test(ua)){
 			if (/Chrome\/(\S+)/.test(ua)){
 				Sys.chrome = parseFloat(RegExp["$1"]);
+				console.log("Chrome Version: " + Sys.chrome);
 				if(Sys.chrome >= 28) {
 	        		version_flag = true;
 	        	}
 			} else {
 				Sys.safari = parseFloat(RegExp["$1"]);
-				if(Sys.safari >= 6) {
+				console.log("Safari Version: " + Sys.safari);
+				if(Sys.safari >= 5) {
 	        		version_flag = true;
 	        	}
 			}
 		} else if (/rv:([^\)]+)\) Gecko\/\d{8}/.test(ua)){
 			if (/Firefox\/(\S+)/.test(ua)){
 				Sys.firefox = parseFloat(RegExp["$1"]);
+				console.log("Firefox Version: " + Sys.firefox);
 				if(Sys.firefox >= 26) {
 	        		version_flag = true;
 	        	}
 			}
 		} else if(/MSIE ([^;]+)/.test(ua)) {
 			Sys.ie = parseFloat(RegExp["$1"]);
+			console.log("IE Version: " + Sys.ie);
 			if(Sys.ie >= 9) {
         		version_flag = true;
         	}
