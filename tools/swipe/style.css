@@ -15,16 +15,10 @@ body {
   font-family:arial,"Hiragino Sans GB","Microsoft Yahei",sans-serif;
 }
 h1 {
-  font-size:33px;
-  line-height: 40px;
+  font-size:30px;
+  line-height: 60px;
   text-align:center;
   color:#212121;
-}
-h2 {
-  font-size:14px;
-  font-weight:bold;
-  color:#3c3c3c;
-  margin:20px 10px 10px;
 }
 small {
   margin:0 10px 30px;
@@ -35,8 +29,18 @@ a {
   color:#3c3c3c;
   text-decoration: none;
 }
-#mySwipe div {
-  margin-top: 20px;
+.title {
+  overflow: hidden;
+}
+.title li {
+  width: 33.33%;
+  line-height: 40px;
+  text-align: center;
+  float: left;
+  list-style: none;
+}
+.title li.active {
+  border-bottom: 2px solid #ff1234;
 }
 #mySwipe div li {
   list-style: none;
