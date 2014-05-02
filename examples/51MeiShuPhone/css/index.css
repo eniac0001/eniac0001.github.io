@@ -84,7 +84,7 @@ html.mm-opening .mm-menu.mm-bottom.mm-front,html.mm-opening .mm-menu.mm-bottom.m
 .mm-menu.mm-front,.mm-menu.mm-next{left:-80%}
 @media all and (max-width:175px){.mm-menu.mm-front,.mm-menu.mm-next{left:-140px}}@media all and (min-width:550px){.mm-menu.mm-front,.mm-menu.mm-next{left:-440px}}.mm-menu.mm-right.mm-front,.mm-menu.mm-right.mm-next{right:-80%}
 @media all and (max-width:175px){.mm-menu.mm-right.mm-front,.mm-menu.mm-right.mm-next{right:-140px}}@media all and (min-width:550px){.mm-menu.mm-right.mm-front,.mm-menu.mm-right.mm-next{right:-440px}}#slideMenu{background-color:#fff}#slideMenu li.MLogo{background:url("../images/logo.png") #fff no-repeat center center;background-size:120px;height:70px;border-bottom:8px solid #cc2a1e}#slideMenu li.MLogo img{float:right;width:40px;margin-top:15px;margin-right:10px;cursor:pointer}
-#slideMenu h3{line-height:40px;background-color:#f4f4f4;padding-left:20px;border-bottom:1px solid #c7c7c7;font-size:18px}
-#slideMenu div{display:none}#slideMenu div li{padding-left:20px;border-bottom:1px solid #c7c7c7}
-#slideMenu div a{display:block;float:left;width:25%;line-height:40px}
+#slideMenu h3{line-height:40px;background-color:#f4f4f4;padding-left:15px;border-bottom:1px solid #c7c7c7;font-size:16px}
+#slideMenu div{display:none}#slideMenu div li{padding-left:15px;border-bottom:1px solid #c7c7c7}
+#slideMenu div a{display:block;float:left;width:25%;line-height:40px;font-size:14px}
 #slideMenu div .special a{width:50%}
