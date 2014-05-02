@@ -20,11 +20,6 @@ h1 {
   text-align:center;
   color:#212121;
 }
-small {
-  margin:0 10px 30px;
-  display:block;
-  font-size:12px;
-}
 a {
   color:#3c3c3c;
   text-decoration: none;
@@ -41,6 +36,7 @@ a {
 }
 .title li.active {
   border-bottom: 2px solid #ff1234;
+  color: #ff1234;
 }
 #mySwipe div li {
   list-style: none;
@@ -50,7 +46,4 @@ a {
   text-overflow: ellipsis;
   white-space: nowrap;
   padding: 0 10px;
-}
-.p_newslist_ico {
-  display: none;
 }

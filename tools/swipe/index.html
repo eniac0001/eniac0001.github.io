@@ -1,7 +1,7 @@
 <!DOCTYPE HTML> 
 <html>
 <head>
-<title>Swipe 2</title>
+<title>新闻列表触摸轮播</title>
 <meta charset="UTF-8" >
 <meta http-equiv="X-UA-Compatible" content="IE=8">
 <meta name='viewport' content='width=device-width, initial-scale=1.0, maximum-scale=1.0'/> 
@@ -19,7 +19,7 @@
   overflow: hidden;
   position: relative;
 }
-.swipe-wrap > div {
+.swipe-wrap > ul {
   float:left;
   width:100%;
   position: relative;
@@ -41,7 +41,7 @@
 </div>
 <div id='mySwipe' class='swipe'>
   <div class='swipe-wrap'>
-    <div>
+    <ul>
         <li><a href="#">希伯特连两场0分场边傻乐.图</a></li>
         <li><a href="#">中超京津战爆棚四万球迷助阵</a></li>
         <li><a href="#">欧联尤文0-0无缘决赛.瓦伦3-1</a></li>
@@ -52,8 +52,8 @@
         <li><a href="#">高清图:莎娃秀恩爱摸男友脸蛋</a></li>
         <li><a href="#">视频:贝克汉姆39岁生日快乐!</a></li>
         <li><a href="#">GO桌面:安全美化同步实现</a></li>
-    </div>
-    <div>
+    </ul>
+    <ul>
         <li><a href="#">张晋蔡少芬地下情4年女方流产</a></li>
         <li><a href="#">吴孟达熬夜打麻将称能治百病</a></li>
         <li><a href="#">影帝梁家辉发妻曾斗黑道救夫</a></li>
@@ -64,8 +64,8 @@
         <li><a href="#">蕾哈娜透视装满头辫绿唇雷人</a></li>
         <li><a href="#">孙宁离婚后择偶标准:宠我爱狗</a></li>
         <li><a href="#">巩俐与张国荣喝酒亲密照曝光</a></li>
-    </div>
-    <div>
+    </ul>
+    <ul>
         <li><a href="#">催眠大师:徐峥玩转心理悬疑</a></li>
         <li><a href="#">催眠大师:徐峥玩转心理悬疑</a></li>
         <li><a href="#">催眠大师:徐峥玩转心理悬疑</a></li>
@@ -76,7 +76,7 @@
         <li><a href="#">催眠大师:徐峥玩转心理悬疑</a></li>
         <li><a href="#">催眠大师:徐峥玩转心理悬疑</a></li>
         <li><a href="#">催眠大师:徐峥玩转心理悬疑</a></li>
-    </div>
+    </ul>
   </div>
 </div>
 
@@ -85,17 +85,39 @@
 </div>
 
 <script type="text/javascript" src="../../javascripts/jquery.js"></script>
-<script src='js/swipe.js'></script>
-<script>
+<script type="text/javascript" src='js/swipe.js'></script>
+<script type="text/javascript">
 
-// pure JS
-//var elem = document.getElementById('mySwipe');
-var r = new Swipe($('#mySwipe')[0], {
-  startSlide: 0,
-  callback: function(index, element) {
-    $('.title li.active').removeClass('active');
-    $('.title li').eq(index).addClass('active');
-  }
+$(function(){
+  var mySwipe = Swipe($('#mySwipe')[0], {
+    startSlide: 0,
+    callback: function(index, element) {
+      $('.title li.active').removeClass('active');
+      $('.title li').eq(index).addClass('active');
+    }
+  });
+
+  $('.title li').each(function(index){
+    $(this).click(function(){
+      var visible = $('.title li.active').index();
+      if (visible !== index) {
+        //
+        if (Math.abs(visible - index) <= 1) {
+          if(index > visible) {
+            mySwipe.next()
+          } else {
+            mySwipe.prev();
+          }
+        } else {
+          if (visible === $('.title li').length - 1) {
+            mySwipe.next();
+          } else if(visible === 0){
+            mySwipe.prev();
+          }
+        }
+      }
+    });
+  });
 });
 
 // with jQuery
