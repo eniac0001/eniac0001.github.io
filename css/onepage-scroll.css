@@ -4,6 +4,7 @@ body, html {
   -webkit-transition: opacity 400ms;
   -moz-transition: opacity 400ms;
   transition: opacity 400ms;
+  padding: 0;
 }
 
 body, .onepage-wrapper, html {
