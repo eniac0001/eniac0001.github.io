@@ -175,7 +175,7 @@
 				<div class="index_page">
 					<div class="ip_content">
 						<div class="proverb"><h1>微言微语：</h1><div>如果我不联系你，你也不联系我，是不是总有一天，我们终将成为陌生人？</div></div>
-						<a style="border:0" href="http://woerwosi.com/blog/" title=""><img style="border:0" src="http://static-woerwosi.qiniudn.com/images/2014/blog_enter.png" alt="enter" /></a>
+						<a style="border:0" href="http://tmallstudio.com/blog/" title=""><img style="border:0" src="http://static-woerwosi.qiniudn.com/images/2014/blog_enter.png" alt="enter" /></a>
 					</div>
 				</div>
 			</div>
@@ -290,6 +290,7 @@
 				$('.loading').fadeOut();
 				//setTimeOut(1000);
 				$('#wrapper').show();
+				$('.loading').remove();
 			}
 
      		// MainLeft Click Event
@@ -345,7 +346,7 @@
 					document.cookie = "woerwosiResume=" + CryptoJS.MD5(inputValue).words.join("").toString();
 					$('.resumeTip').html("").hide();
 					//alert(document.cookie.split(";")["woerwosiResume"]);
-					window.location.href = "http://woerwosi.com/resume/?woerwosiResume=" + CryptoJS.MD5(inputValue).words.join("").toString();
+					window.location.href = "http://tmallstudio.com/resume/?woerwosiResume=" + CryptoJS.MD5(inputValue).words.join("").toString();
 				} else {
 					// failure
 					$('.resumeTip').html("访问码不正确，请重新输入！");
