@@ -48,14 +48,14 @@
 				<p>高校所在地域多是就业首选</p>
 				<p>在省外高校发布的就业质量报告中，记者发现与省内高校毕业生就业流向情况相同，学校所在地域成为毕业生的主要流向。如上海交通大学，毕业生在东部地区就业的占就业学生的92.63%，而在上海当地就业的更是达到了75.96%。北京高校中，中国传媒大学2013届毕业生在北京地区就业的约占 55%。</p>
 				<div class="de-more">
-					<a href="#" title="">查看更多<img src="images/de-more.png" alt="" /></a>
+					<a href="#" title=""><div>查看更多</div></a>
 				</div>
-				<div class="share">
-					分享到：
-					<a href="#" title=""><img src="images/wechat.png" alt=""></a>
-					<a href="#" title=""><img src="images/sina.png" alt=""></a>
-					<a href="#" title=""><img src="images/tencent.png" alt=""></a>
+				<div class="share clear">
 					<a href="#" title=""><img src="images/qqzone.png" alt=""></a>
+					<a href="#" title=""><img src="images/tencent.png" alt=""></a>
+					<a href="#" title=""><img src="images/sina.png" alt=""></a>
+					<a href="#" title=""><img src="images/wechat.png" alt=""></a>
+					<span>分享到：</span>
 				</div>
 			</div>
 			<ul class="relate">
@@ -231,6 +231,34 @@
 	</nav>
 	<script type="text/javascript" src="js/jquery-1.11.0.min.js"></script>
 	<script type="text/javascript" src="js/jquery.mmenu.min.js"></script>
-	<script type="text/javascript" src="js/base.js"></script>
+	<script type="text/javascript">
+	$(function(){
+
+		$('nav#slideMenu').mmenu({
+			position: "right"
+		});
+		$(".closeSlideMenu").click(function(){
+			$("#slideMenu").trigger("close");
+		});
+		$(".openSlideMenu").click(function(){
+			$("#slideMenu").trigger("open");
+			$('html, body').scrollTop(0);
+		});
+		$(".goTop").click(function(){
+			$('html, body').animate({"scrollTop": 0},200);
+		});
+		$(".slideMenu > h3").each(function(index){
+			$(this).click(function(){
+				if($(this).hasClass('add')) {
+					$(this).removeClass('add').addClass('minus');
+					$(this).next('div').slideDown();
+				} else if ($(this).hasClass('minus')) {
+					$(this).removeClass('minus').addClass('add');
+					$(this).next('div').slideUp();
+				}
+			});
+		});
+	});
+	</script>
 </body>
 </html>

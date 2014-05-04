@@ -24,15 +24,4 @@ $(function(){
 			}
 		});
 	});
-	$(".huashi > h3, .schoollist > h3").each(function(index){
-		$(this).click(function(){
-			if($(this).hasClass('add2')) {
-				$(this).removeClass('add2').addClass('minus2');
-				$(this).next('ul').slideDown();
-			} else if ($(this).hasClass('minus2')) {
-				$(this).removeClass('minus2').addClass('add2');
-				$(this).next('ul').slideUp();
-			}
-		});
-	});
 });
