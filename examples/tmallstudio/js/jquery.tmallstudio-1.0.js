@@ -233,9 +233,54 @@
 		var scrollId;
 		var isScrolling = false;
 
+		// OK ...
 		//when scrolling...
 		$(window).scroll(function(e){
+			if(!options.autoScrolling){	
 
+				var currentScroll = $(window).scrollTop();
+				
+				var scrolledSections = $('.section').map(function(){
+					if ($(this).offset().top < (currentScroll + 100)){
+						return $(this);
+					}
+				});
+				
+				//geting the last one, the current one on the screen
+				var currentSection = scrolledSections[scrolledSections.length-1];
+				
+				//executing only once the first time we reach the section
+				if(!currentSection.hasClass('active')){
+					isScrolling = true;	
+					
+					var yMovement = getYmovement(currentSection);
+					
+					$('.section.active').removeClass('active');
+					currentSection.addClass('active');
+				
+					var anchorLink  = currentSection.data('anchor');
+					$.isFunction( options.onLeave ) && options.onLeave.call( this, currentSection.index('.section'), yMovement);
+
+					$.isFunction( options.afterLoad ) && options.afterLoad.call( this, anchorLink, (currentSection.index('.section') + 1));
+					
+					activateMenuElement(anchorLink);	
+					activateNavDots(anchorLink, 0);
+					
+				
+					if(options.anchors.length && !isMoving){
+						//needed to enter in hashChange event when using the menu with anchor links
+						lastScrolledDestiny = anchorLink;
+			
+						location.hash = anchorLink;
+					}
+					
+					//small timeout in order to avoid entering in hashChange event when scrolling is not finished yet
+					clearTimeout(scrollId);
+					scrollId = setTimeout(function(){					
+						isScrolling = false;
+					}, 100);
+				}
+			}
 		});
 
 
@@ -354,7 +399,76 @@
 		};
 
 		function scrollPage(element, callback) {
+			var scrollOptions = {}, scrolledElement;
+			var dest = element.position();
+			var dtop = dest !== null ? dest.top : null;
+			var yMovement = getYmovement(element);
+			var anchorLink  = element.data('anchor');
+			var sectionIndex = element.index('.section');
+			var leavingSection = $('.section.active').index('.section') + 1;
+			
+			element.addClass('active').siblings().removeClass('active');
+			
+			//preventing from activating the MouseWheelHandler event
+			//more than once if the page is scrolling
+			isMoving = true;
+			
+			if(!$.isFunction( callback )){
+				if(typeof anchorLink !== 'undefined'){
+					location.hash = anchorLink;
+				}else{
+					location.hash = '';
+				}
+			}
+			
+			if(options.autoScrolling){
+				scrollOptions['top'] = -dtop;
+				scrolledElement = '#superContainer';
+			}else{
+				scrollOptions['scrollTop'] = dtop;
+				scrolledElement = 'html, body';
+			}		
+						
+			if(options.css3 && options.autoScrolling){
 
+				
+				$.isFunction( options.onLeave ) && options.onLeave.call( this, leavingSection, yMovement);
+
+				var translate3d = 'translate3d(0px, -' + dtop + 'px, 0px)';
+				transformContainer(translate3d, true);
+				
+				setTimeout(function(){
+					$.isFunction( options.afterLoad ) && options.afterLoad.call( this, anchorLink, (sectionIndex + 1));
+
+						setTimeout(function(){
+							isMoving = false;
+							$.isFunction( callback ) && callback.call( this);
+						}, scrollDelay);
+				}, options.scrollingSpeed);
+			}else{
+				$.isFunction( options.onLeave ) && options.onLeave.call( this, leavingSection, yMovement);
+				
+				$(scrolledElement).animate(
+					scrollOptions 
+				, options.scrollingSpeed, options.easing, function() {
+					//callback
+					$.isFunction( options.afterLoad ) && options.afterLoad.call( this, anchorLink, (sectionIndex + 1));
+					
+					setTimeout(function(){
+						isMoving = false;
+						$.isFunction( callback ) && callback.call( this);
+					}, scrollDelay);
+				});
+			}
+			
+			//flag to avoid callingn `scrollPage()` twice in case of using anchor links
+			lastScrolledDestiny = anchorLink;
+			
+			//avoid firing it twice (as it does also on scroll)
+			if(options.autoScrolling){
+				activateMenuElement(anchorLink);
+				activateNavDots(anchorLink, sectionIndex);
+			}
 		}
 
 		function scrollToAnchor(){
@@ -412,13 +526,6 @@
 
 		});
 
-		/**
-		* Scrolls horizontal sliders.
-		*/
-		function landscapeScroll(slides, destiny){
-
-		}
-
 		if (!isTablet) {
 
 		}
@@ -426,6 +533,21 @@
 		$(window).bind('orientationchange', function() {
 			doneResizing();
 		});
+
+		/**
+		* Scrolls the slider to the given slide destination for the given section
+		*/
+		$(document).on('click', '.fullPage-slidesNav a', function(e){
+
+
+		});
+
+		/**
+		* Scrolls horizontal sliders.
+		*/
+		function landscapeScroll(slides, destiny){
+
+		}
 
 		/**
 		 * When resizing is finished, we adjust the slides sizes and positions
@@ -538,14 +660,6 @@
 			
 			nav.find('li').first().find('a').addClass('active');
 		}
-
-		/**
-		* Scrolls the slider to the given slide destination for the given section
-		*/
-		$(document).on('click', '.fullPage-slidesNav a', function(e){
-
-
-		});
 
 		/**
 		* OK...
