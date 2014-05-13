@@ -46,7 +46,40 @@
 		var scrollDelay = 700;
 
 		$.fn.tmallstudio.setAutoScrolling = function(value) {
-			//-------------------------------------------------------------------------------------------------
+			options.autoScrolling = value;
+			var element = $('.section.active');
+			if(options.autoScrolling){
+				$('html, body').css({
+					'overflow' : 'hidden',
+					'height' : '100%'
+				});
+				
+				if(element.length){
+					//moving the container up
+					if(options.css3){
+						var translate3d = 'translate3d(0px, -' + element.position().top + 'px, 0px)';
+						transformContainer(translate3d, false)
+					}else{
+						//deleting the possible negative top
+						$('#superContainer').css('top', '-'  + element.position().top + 'px');
+					}
+				}
+			}else{
+				$('html, body').css({
+					'overflow' : 'auto',
+					'height' : 'auto'
+				});
+				if(options.css3){
+					//moving the container up
+					var translate3d = 'translate3d(0px, 0px, 0px)';
+					transformContainer(translate3d, false)
+				}else{
+					//deleting the possible negative top
+					$('#superContainer').css('top', '0px');
+				}
+				//scrolling the page to the section with no animation
+				$('html, body').scrollTop(element.position().top);
+			}
 		};
 
 
@@ -101,18 +134,100 @@
 			}
 
 			if (options.navigation) {
-
+				var link = '';
+				if(options.anchors.length){
+					link = options.anchors[index];
+				}
+				var tooltip = options.navigationTooltips[index];
+				if(typeof tooltip === 'undefined'){
+					tooltip = '';
+				}
+				
+				nav.find('ul').append('<li data-tooltip="' + tooltip + '"><a href="#' + link + '"><span></span></a></li>');
 			}
 
 			// if there's any slide
 			if (numSlides > 0) {
-
-			} else {
+				var sliderWidth = numSlides * 100;
+				var slideWidth = 100 / numSlides;
 				
+				slides.wrapAll('<div class="slidesContainer" />');
+				slides.parent().wrap('<div class="slides" />');
+
+				$(this).find('.slidesContainer').css('width', sliderWidth + '%');
+				$(this).find('.slides').after('<div class="controlArrow prev"></div><div class="controlArrow next"></div>');
+				$(this).find('.controlArrow.next').css('border-color', 'transparent transparent transparent '+options.controlArrowColor);
+				$(this).find('.controlArrow.prev').css('border-color', 'transparent '+ options.controlArrowColor + ' transparent transparent');
+				
+				if(!options.loopHorizontal){
+					$(this).find('.controlArrow.prev').hide();
+				}
+
+				if(options.slidesNavigation){
+					addSlidesNavigation($(this), numSlides);
+				}
+				
+				slides.each(function(index) {
+					if(!index){
+						$(this).addClass('active');
+					}
+					
+					$(this).css('width', slideWidth + '%');
+					
+					if(options.verticalCentered){
+						addTableClass($(this));
+					}
+				});
+			} else {
+				if(options.verticalCentered){
+					addTableClass($(this));
+				}
+			}
+        // Top is OK. ......................................................................................
+		}).promise().done(function(){
+			$.fn.tmallstudio.setAutoScrolling(options.autoScrolling);
+
+			$.isFunction( options.afterRender ) && options.afterRender.call( this);
+
+			//fixed elements need to be moved out of the plugin container due to problems with CSS3.
+			if(options.fixedElements && options.css3){
+				$(options.fixedElements).appendTo('body');
+			}
+			
+			//vertical centered of the navigation + first bullet active
+			if(options.navigation){
+				nav.css('margin-top', '-' + (nav.height()/2) + 'px');
+				nav.find('li').first().find('a').addClass('active');
+			}
+			
+			//moving the menu outside the main container (avoid problems with fixed positions when using CSS3 tranforms)
+			if(options.menu && options.css3){
+				$(options.menu).appendTo('body');
 			}
 
-		}).promise().done(function(){
+			if(options.scrollOverflow){
+				//after DOM and images are loaded 
+				$(window).on('load', function() {
+					
+					$('.section').each(function(){
+						var slides = $(this).find('.slide');
+						
+						if(slides.length){
+							slides.each(function(){
+								// This function ----------------------------------------------------------------
+								createSlimScrolling($(this));
+							});
+						}else{
+							createSlimScrolling($(this));
+						}
+						
+					});
+				});
+			}
 
+			$(window).on('load', function() {
+				scrollToAnchor();	
+			});
 		});
 		
 		var scrollId;
@@ -209,11 +324,29 @@
 		}
 
 		$.fn.tmallstudio.moveSectionUp = function(){
+			var prev = $('.section.active').prev('.section');
+			
+			//looping to the bottom if there's no more sections above
+			if(options.loopTop && !prev.length){
+				prev = $('.section').last();
+			}
 
+			if (prev.length > 0 || (!prev.length && options.loopTop)){
+				scrollPage(prev);
+			}
 		};
 
 		$.fn.tmallstudio.moveSectionDown = function (){
-
+			var next = $('.section.active').next('.section');
+			
+			//looping to the top if there's no more sections below
+			if(options.loopBottom && !next.length){
+				next = $('.section').first();
+			}
+	
+			if (next.length > 0 || (!next.length && options.loopBottom)){
+				scrollPage(next);
+			}
 		};
 
 		$.fn.tmallstudio.moveTo = function (section, slide){
@@ -225,7 +358,15 @@
 		}
 
 		function scrollToAnchor(){
-
+			//getting the anchor link in the URL and deleting the `#`
+			var value =  window.location.hash.replace('#', '').split('/');
+			var section = value[0];
+			var slide = value[1];
+						
+			if(section){  //if theres any #	
+			    // This function -----------------------------------------------------------------------			
+				scrollPageAndSlide(section, slide);
+			}
 		}
 
 		//detecting any change on the URL to scroll to the given anchor link
@@ -352,7 +493,14 @@
 		* Adds a css3 transform property to the container class with or without animation depending on the animated param.
 		*/
 		function transformContainer(translate3d, animated){
-
+			$('#superContainer').toggleClass('easing', animated);
+			
+			$('#superContainer').css({
+				'-webkit-transform': translate3d,
+				'-moz-transform': translate3d,
+				'-ms-transform':translate3d,
+				'transform': translate3d
+			});
 		}
 
 		/**
@@ -371,10 +519,24 @@
 		}
 
 		/**
+		* OK...
 		* Creates a landscape navigation bar with dots for horizontal sliders.
 		*/
 		function addSlidesNavigation(section, numSlides){
+			section.append('<div class="fullPage-slidesNav"><ul></ul></div>');
+			var nav = section.find('.fullPage-slidesNav');
 
+			//top or bottom
+			nav.addClass(options.slidesNavPosition);
+
+			for(var i=0; i< numSlides; i++){			
+				nav.find('ul').append('<li><a href="#"><span></span></a></li>');
+			}
+			
+			//centering it
+			nav.css('margin-left', '-' + (nav.width()/2) + 'px');
+			
+			nav.find('li').first().find('a').addClass('active');
 		}
 
 		/**
@@ -386,6 +548,7 @@
 		});
 
 		/**
+		* OK...
 		* Checks for translate3d support 
 		* @return boolean
 		* http://stackoverflow.com/questions/5661671/detecting-transform-translate3d-support
