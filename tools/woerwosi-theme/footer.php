@@ -12,15 +12,17 @@
 
 		</div><!-- #main -->
 		<footer id="colophon" class="site-footer" role="contentinfo">
-			<?php get_sidebar( 'main' ); ?>
-
-			<div class="site-info">
-				<?php do_action( 'twentythirteen_credits' ); ?>
-				<a href="<?php echo esc_url( __( 'http://wordpress.org/', 'twentythirteen' ) ); ?>" title="<?php esc_attr_e( 'Semantic Personal Publishing Platform', 'twentythirteen' ); ?>"><?php printf( __( 'Proudly powered by %s', 'twentythirteen' ), 'WordPress' ); ?></a>
-			</div><!-- .site-info -->
+			<div class="woerwosi-siteInfo">
+				Copyright &copy; 2014 - VictoryZhang(CN) -
+                <span class="credit">Powered by <a href="http://wordpress.org">WordPress</a></span>
+			</div>
 		</footer><!-- #colophon -->
 	</div><!-- #page -->
 
 	<?php wp_footer(); ?>
+	<script type="text/javascript">
+var _bdhmProtocol = (("https:" == document.location.protocol) ? " https://" : " http://");
+document.write(unescape("%3Cscript src='" + _bdhmProtocol + "hm.baidu.com/h.js%3F12ea0613a43d2c81fb26266aa028e6f2' type='text/javascript'%3E%3C/script%3E"));
+	</script>
 </body>
 </html>

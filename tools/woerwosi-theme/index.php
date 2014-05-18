@@ -10,8 +10,8 @@
  * @link http://codex.wordpress.org/Template_Hierarchy
  *
  * @package WordPress
- * @subpackage Twenty_Thirteen
- * @since Twenty Thirteen 1.0
+ * @subpackage woerwosi
+ * @since woerwosi 0.1
  */
 
 get_header(); ?>
@@ -32,7 +32,6 @@ get_header(); ?>
 		<?php endif; ?>
 
 		</div><!-- #content -->
+		<?php get_footer(); ?>
 	</div><!-- #primary -->
-
 <?php get_sidebar(); ?>
-<?php get_footer(); ?>

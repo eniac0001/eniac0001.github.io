@@ -34,7 +34,7 @@ if ( ! isset( $content_width ) )
 /**
  * Add support for a custom header image.
  */
-require get_template_directory() . '/inc/custom-header.php';
+/*require get_template_directory() . '/inc/custom-header.php';*/
 
 /**
  * Twenty Thirteen only works in WordPress 3.6 or later.
@@ -529,3 +529,5 @@ function twentythirteen_customize_preview_js() {
 	wp_enqueue_script( 'twentythirteen-customizer', get_template_directory_uri() . '/js/theme-customizer.js', array( 'customize-preview' ), '20130226', true );
 }
 add_action( 'customize_preview_init', 'twentythirteen_customize_preview_js' );
+
+remove_action('wp_head','wp_generator');
