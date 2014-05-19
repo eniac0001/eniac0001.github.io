@@ -828,8 +828,6 @@ body {
 .site-header .home-link {
 	color: #141412;
 	display: block;
-	margin: 0 auto;
-	max-width: 1080px;
 	padding: 10px 35px 0;
 	text-decoration: none;
 	width: 100%;
@@ -840,20 +838,13 @@ body {
 	padding-top: 20px;
 	text-align: center;
 }
-.blogLogo img {
-	max-width: 150px;
-}
 .site-title {
-	font-size: 30px;
-	text-align: center;
-	font-weight: 300;
-	line-height: 1;
 	margin: 0 0 10px;
-	padding: 20px 0 10px;
-	color: #EFEFEF;
-	text-shadow: 0 1px #333;
+	text-indent: -999px;
+	height: 70px;
+	background: url("images/textLogo.png") no-repeat center 10px;
+	background-size: 80%;
 }
-
 .site-description {
 	font-size: 14px;
 	font-weight: 300;
@@ -1037,7 +1028,6 @@ ul.nav-menu .focus > ul,
 .sidebar .entry-content,
 .sidebar .entry-summary,
 .sidebar .entry-meta {
-	max-width: 1040px;
 	padding: 0 376px 0 60px;
 }
 
@@ -1795,14 +1785,14 @@ footer.entry-meta {
 
 .attachment .entry-header {
 	margin-bottom: 0;
-	max-width: 1040px;
 	padding: 30px 0;
 }
 
 .attachment .entry-title {
 	display: inline-block;
 	float: left;
-	font: 300 italic 30px "Source Sans Pro", Helvetica, sans-serif;
+	font-size: 20px;
+	font-weight: 300;
 	margin: 0;
 }
 
@@ -1854,8 +1844,6 @@ footer.entry-meta {
 }
 
 .image-navigation {
-	margin: 0 auto;
-	max-width: 1040px;
 	position: relative;
 }
 
@@ -1885,8 +1873,6 @@ footer.entry-meta {
 
 .attachment .entry-attachment,
 .attachment .type-attachment p {
-	margin: 0 auto;
-	max-width: 724px;
 	text-align: center;
 }
 
@@ -1900,7 +1886,6 @@ footer.entry-meta {
 
 .attachment .entry-description {
 	margin: 20px auto 0;
-	max-width: 604px;
 }
 
 .attachment .entry-caption p:last-child,
@@ -1953,13 +1938,10 @@ footer.entry-meta {
 }
 
 .paging-navigation .nav-links {
-	margin: 0 auto;
-	max-width: 604px;
 	width: 100%;
 }
 
 .sidebar .paging-navigation .nav-links {
-	max-width: 1040px;
 	padding: 0 376px 0 60px;
 }
 
@@ -2008,8 +1990,6 @@ footer.entry-meta {
 }
 
 .post-navigation .nav-links {
-	margin: 0 auto;
-	max-width: 1040px;
 }
 
 .sidebar .post-navigation .nav-links {
@@ -2028,15 +2008,12 @@ footer.entry-meta {
  */
 
 .author-info {
-	margin: 0 auto;
-	max-width: 604px;
 	padding: 30px 0 10px;
 	text-align: left; /* gallery & video post formats */
 	width: 100%;
 }
 
 .author.sidebar .author-info {
-	max-width: 1040px;
 	padding: 30px 376px 10px 60px;
 }
 
@@ -2109,23 +2086,19 @@ footer.entry-meta {
 }
 
 .page-title {
-	font: 300 italic 30px "Source Sans Pro", Helvetica, sans-serif;
+	font-size: 30px;
+	font-weight: 300;
 	margin: 0 auto;
-	max-width: 1040px;
 	padding: 30px 0;
 	width: 100%;
 }
 
 .page-content {
-	margin: 0 auto;
-	max-width: 604px;
 	padding: 40px 0;
 	width: 100%;
 }
 
 .sidebar .page-content {
-	margin: 0 auto;
-	max-width: 1040px;
 	padding: 40px 376px 40px 60px;
 }
 
@@ -2166,7 +2139,6 @@ footer.entry-meta {
 .error404 .page-header,
 .error404 .page-content {
 	margin: 0 auto;
-	max-width: 1040px;
 	padding-bottom: 40px;
 	width: 100%;
 }
@@ -2423,7 +2395,6 @@ footer.entry-meta {
 	font-style: italic;
 	font-weight: 300;
 	margin: 0 auto;
-	max-width: 604px;
 	padding: 20px 0 30px;
 	width: 100%;
 }
@@ -2451,7 +2422,6 @@ footer.entry-meta {
 
 .site-main .mu_register {
 	margin: 0 auto;
-	max-width: 604px;
 	width: 100%;
 }
 
@@ -2702,7 +2672,6 @@ footer.entry-meta {
 
 	.error404 .page-header {
 		margin-left: auto;
-		max-width: 604px;
 		width: 100%;
 	}
 
@@ -2732,7 +2701,7 @@ footer.entry-meta {
 	}
 
 	.attachment .image-navigation {
-		max-width: 724px;
+		
 	}
 
 	.image-navigation .nav-previous,
@@ -2846,7 +2815,6 @@ footer.entry-meta {
 
 	.attachment .image-navigation,
 	.attachment .entry-attachment .attachment {
-		max-width: 604px;
 		padding: 0;
 		width: 100%;
 	}
