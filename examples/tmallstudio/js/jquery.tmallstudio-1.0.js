@@ -10,7 +10,7 @@
 			'slidesColor' : [],
 			'anchors':[],
 			'scrollingSpeed': 700,
-			'easing': 'easeInQuart',
+			'easing': 'linear', //easeInQuart
 			'menu': false,
 			'navigation': false,
 			'navigationPosition': 'right',
@@ -127,6 +127,7 @@
 			
 			if (typeof options.slidesColor[index] !==  'undefined') {
 				$(this).css('background-color', options.slidesColor[index]);
+				// $(this).css('background-image', 'url('+ options.slidesColor[index] +')');
 			}
 
 			if (typeof options.anchors[index] !== 'undefined') {
@@ -183,7 +184,6 @@
 					addTableClass($(this));
 				}
 			}
-        // Top is OK. ......................................................................................
 		}).promise().done(function(){
 			$.fn.tmallstudio.setAutoScrolling(options.autoScrolling);
 
@@ -214,7 +214,6 @@
 						
 						if(slides.length){
 							slides.each(function(){
-								// This function ----------------------------------------------------------------
 								createSlimScrolling($(this));
 							});
 						}else{
@@ -233,7 +232,6 @@
 		var scrollId;
 		var isScrolling = false;
 
-		// OK ...
 		//when scrolling...
 		$(window).scroll(function(e){
 			if(!options.autoScrolling){	
@@ -282,7 +280,7 @@
 				}
 			}
 		});
-
+        // Top is OK. ......................................................................................
 
 		var touchStartY = 0;
 		var touchStartX = 0;
@@ -395,7 +393,19 @@
 		};
 
 		$.fn.tmallstudio.moveTo = function (section, slide){
-
+            var destiny = '';
+			
+			if(isNaN(section)){
+				destiny = $('[data-anchor="'+section+'"]');
+			}else{
+				destiny = $('.section').eq( (section -1) );
+			}
+			
+			if (slide !== 'undefined'){
+				scrollPageAndSlide(section, slide);
+			}else if(destiny.length > 0){
+				scrollPage(destiny);
+			}
 		};
 
 		function scrollPage(element, callback) {
@@ -486,7 +496,17 @@
 		//detecting any change on the URL to scroll to the given anchor link
 		//(a way to detect back history button as we play with the hashes on the URL)
 		$(window).on('hashchange',function(){
-
+            if(!isScrolling){
+				var value =  window.location.hash.replace('#', '').split('/');
+				var section = value[0];
+				var slide = value[1];
+				/*in order to call scrollpage() only once for each destination at a time
+				It is called twice for each scroll otherwise, as in case of using anchorlinks `hashChange` 
+				event is fired on every scroll too.*/
+				if (section && section !== lastScrolledDestiny || (typeof slide != 'undefined' && !slideMoving))  {
+					scrollPageAndSlide(section, slide);
+				}
+			}
 		});
 
 
@@ -499,16 +519,35 @@
 
 		//navigation action 
 		$(document).on('click', '#fullPage-nav a', function(e){
-
+            e.preventDefault();
+			var index = $(this).parent().index();
+			scrollPage($('.section').eq(index));
 		});
 
 		//navigation tooltips 
 		$(document).on({
-
+            ouseenter: function(){
+				var tooltip = $(this).data('tooltip');
+				$('<div class="fullPage-tooltip ' + options.navigationPosition +'">' + tooltip + '</div>').hide().appendTo($(this)).fadeIn(200);
+			},
+			mouseleave: function(){
+				$(this).find('.fullPage-tooltip').fadeOut().remove();
+			}
 		}, '#fullPage-nav li');
 
 		if(options.normalScrollElements){
-
+            $(document).on('mouseover', options.normalScrollElements, function () {
+				if (document.addEventListener) {
+					document.removeEventListener('mousewheel', MouseWheelHandler, false); //IE9, Chrome, Safari, Oper
+					document.removeEventListener('DOMMouseScroll', MouseWheelHandler, false); //Firefox
+				} else {
+					document.detachEvent("onmousewheel", MouseWheelHandler); //IE 6/7/8
+				}
+			});
+			
+			$(document).on('mouseout', options.normalScrollElements, function(){
+				addScrollEvent();
+			});
 		}
 
 
@@ -527,7 +566,15 @@
 		});
 
 		if (!isTablet) {
+			var resizeId;
 
+			//when resizing the site, we adjust the heights of the sections
+			$(window).resize(function() {
+				//in order to call the functions only when the resize is finished
+				//http://stackoverflow.com/questions/4298612/jquery-how-to-call-resize-event-only-once-its-finished-resizing
+				clearTimeout(resizeId);
+				resizeId = setTimeout(doneResizing, 500);
+			});
 		}
 
 		$(window).bind('orientationchange', function() {
@@ -567,14 +614,24 @@
 		 * Activating the website navigation dots according to the given slide name.
 		 */
 		function activateNavDots(name, sectionIndex){
-
+            if(options.navigation){
+				$('#fullPage-nav').find('.active').removeClass('active');
+				if(name){ 
+					$('#fullPage-nav').find('a[href="#' + name + '"]').addClass('active');
+				}else{
+					$('#fullPage-nav').find('li').eq(sectionIndex).find('a').addClass('active');
+				}
+			}
 		}
 
 		/**
 		 * Activating the website main menu elements according to the given slide name.
 		 */
 		function activateMenuElement(name){
-
+            if(options.menu){
+				$(options.menu).find('.active').removeClass('active');
+				$(options.menu).find('[data-menuanchor="'+name+'"]').addClass('active');
+			}
 		}
 
 		/**
@@ -591,7 +648,13 @@
 		* from the current section.
 		*/
 		function getYmovement(destiny){
-
+            var fromIndex = $('.section.active').index('.section');
+			var toIndex = destiny.index('.section');
+			
+			if(fromIndex > toIndex){
+				return 'up';
+			}
+			return 'down';
 		}
 
 
@@ -604,7 +667,48 @@
 		}
 
 		function createSlimScrolling(element){
+            //needed to make `scrollHeight` work under Opera 12
+			element.css('overflow', 'hidden');
 
+			//in case element is a slide
+			var section = element.closest('.section');
+			var scrollable = element.find('.scrollable');
+
+			//if there was scroll, the contentHeight will be the one in the scrollable section
+			if(scrollable.length){
+				var contentHeight = element.find('.scrollable').get(0).scrollHeight  - parseInt(section.css('padding-bottom')) - parseInt(section.css('padding-top'));
+			}else{
+				var contentHeight = element.get(0).scrollHeight  - parseInt(section.css('padding-bottom')) - parseInt(section.css('padding-top'));
+			}
+
+			//needs scroll?
+			if ( contentHeight > windowsHeight) {
+                var scrollHeight = windowsHeight - parseInt(section.css('padding-bottom')) - parseInt(section.css('padding-top'));
+				//was there already an scroll ? Updating it
+				if(scrollable.length){
+					scrollable.css('height', scrollHeight + 'px').parent().css('height', scrollHeight + 'px');
+				} else {
+				    //creating the scrolling		
+					if(options.verticalCentered){
+						element.find('.tableCell').wrapInner('<div class="scrollable" />');
+					}else{
+						element.wrapInner('<div class="scrollable" />');
+					}
+					// Notice: slimScroll --------------------------------------------------------------------------
+					element.find('.scrollable').slimScroll({
+						height: scrollHeight + 'px',
+						size: '10px',
+						alwaysVisible: true
+					});
+				}
+			} else {
+			    //removing the scrolling when it is not necessary anymore		
+				element.find('.scrollable').children().first().unwrap().unwrap();
+				element.find('.slimScrollBar').remove();
+				element.find('.slimScrollRail').remove();
+			}
+			//undo 
+			element.css('overflow', '');
 		}
 
 		function addTableClass(element){
@@ -629,7 +733,22 @@
 		* Scrolls to the given section and slide 
 		*/
 		function scrollPageAndSlide(destiny, slide){
+            if(isNaN(destiny)){
+				var section = $('[data-anchor="'+destiny+'"]');
+			}else{
+				var section = $('.section').eq( (destiny -1) );
+			}
 
+			//we need to scroll to the section and then to the slide
+			if (destiny !== lastScrolledDestiny){
+				scrollPage(section, function(){
+					scrollSlider(section, slide)
+				});
+			}
+			//if we were already in the section
+			else{
+				scrollSlider(section, slide);
+			}
 		}
 
 
@@ -637,7 +756,15 @@
 		* Scrolls the slider to the given slide destination for the given section
 		*/
 		function scrollSlider(section, slide){
-
+            if(typeof slide != 'undefined'){
+				var slides = section.find('.slides');
+				var destiny =  slides.find('[data-anchor="'+slide+'"]');
+				if(!destiny.length){
+					destiny = slides.find('.slide').eq(slide);
+				}
+				
+				landscapeScroll(slides, destiny);
+			}
 		}
 
 		/**

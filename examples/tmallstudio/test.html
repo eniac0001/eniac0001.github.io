@@ -2,11 +2,10 @@
 <html>
 <head>
 	<meta charset="utf-8">
-	<title>天猫工作室 -- TmallStudio.com</title>
+	<title>tmallStudio.com</title>
 	<meta name="description" content="" />
 	<meta name="viewport" content="width=device-width">
-	<link rel="stylesheet" type="text/css" href="css/jquery.fullPage.css" />
-	<link rel="stylesheet" type="text/css" href="css/index.css" />
+	<link rel="stylesheet" type="text/css" href="css/tmallstudio.css" />
 	<script type="text/javascript" src="js/jquery-1.9.1.min.js"></script>
 	<!--Optionally, you can add the jQuery UI library in case you want to use easing effects (this is active by default).-->
 	<!--<script type="text/javascript" src="js/jquery-ui.min.js"></script>-->
@@ -16,19 +15,24 @@
 </head>
 <body>
     <div id="superContainer">
-    	<div class="section active" id="section0"><h1>Section</h1></div>
-		<div class="section" id="section1"><h1>Hello World !</h1></div>
-		<div class="section" id="section2"><h1>Just testing it</h1></div>
-		<div class="section" id="section3"><h1>Looks good</h1></div>
+    	<div class="page">
+    		<div class="page_container">
+				<img src="images/001001001.jpg" alt="" />
+			</div>
+    	</div>
+    	<div class="page">
+    		<div class="page_container">
+				<img src="images/010010010.jpg" alt="" />
+			</div>
+    	</div>
     </div>
 
 	<script type="text/javascript">
 
 		$(document).ready(function() {
-		    $.fn.tmallstudio({
-		    	slidesColor: ['#f2f2f2', '#4BBFC3', '#7BAABE', 'whitesmoke', '#ccddff'],
-				anchors: ['firstPage', 'secondPage', '3rdPage', '4thpage', 'lastPage']
-		    });
+		    $("#superContainer").tmallstudio({
+    			sectionContainer: ".page"
+     		});
 		});
 
 	</script>

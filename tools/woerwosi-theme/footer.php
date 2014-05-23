@@ -13,7 +13,7 @@
 		</div><!-- #main -->
 		<footer id="colophon" class="site-footer" role="contentinfo">
 			<div class="woerwosi-siteInfo">
-				Copyright &copy; 2014 - VictoryZhang(CN) -
+				Copyright &copy; 2014 -   技术支持：<a href="http://tmallstudio.com" target="_blank">TmallStudio.com</a> -
                 <span class="credit">Powered by <a href="http://wordpress.org">WordPress</a></span>
 			</div>
 		</footer><!-- #colophon -->
