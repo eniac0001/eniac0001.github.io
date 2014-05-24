@@ -935,13 +935,6 @@ ul.nav-menu ul a,
 	margin: 0;
 }
 
-ul.nav-menu ul a:hover,
-.nav-menu ul ul a:hover,
-ul.nav-menu ul a:focus,
-.nav-menu ul ul a:focus {
-	/*background-color: #db572f;*/
-}
-
 ul.nav-menu li:hover > ul,
 .nav-menu ul li:hover > ul,
 ul.nav-menu .focus > ul,
@@ -950,14 +943,6 @@ ul.nav-menu .focus > ul,
 	overflow: inherit;
 	height: inherit;
 	width: inherit;
-}
-
-.nav-menu .current_page_item > a,
-.nav-menu .current_page_ancestor > a,
-.nav-menu .current-menu-item > a,
-.nav-menu .current-menu-ancestor > a {
-	color: #bc360a;
-	font-style: italic;
 }
 
 .menu-toggle {
@@ -2081,10 +2066,6 @@ footer.entry-meta {
  * ----------------------------------------------------------------------------
  */
 
-.page-header {
-	background-color: #e8e5ce;
-}
-
 .page-title {
 	font-size: 30px;
 	font-weight: 300;
@@ -2096,6 +2077,7 @@ footer.entry-meta {
 .page-content {
 	padding: 40px 0;
 	width: 100%;
+	border-bottom: 1px solid #DDD;
 }
 
 .sidebar .page-content {
@@ -2687,8 +2669,8 @@ footer.entry-meta {
 	.post-navigation .nav-links,
 	.sidebar .site-info,
 	.site-footer .widget-area {
-		padding-left: 0;
-		padding-right: 0;
+		padding-left: 15px;
+		padding-right: 15px;
 	}
 
 	.error404 .page-title {
