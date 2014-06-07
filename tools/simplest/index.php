@@ -7,11 +7,11 @@
  * It is used to display a page when nothing more specific matches a query.
  * For example, it puts together the home page when no home.php file exists.
  *
- * @link http://codex.wordpress.org/Template_Hierarchy
+ * @link http://woerwosi.com/blog/themes/simplest/
  *
  * @package WordPress
- * @subpackage woerwosi
- * @since woerwosi 0.1
+ * @subpackage simplest
+ * @since simplest 0.1
  */
 
 get_header(); ?>
@@ -31,7 +31,6 @@ get_header(); ?>
 			<?php get_template_part( 'content', 'none' ); ?>
 		<?php endif; ?>
 
-		</div><!-- #content -->
-		<?php get_footer(); ?>
+		</div><!-- #content -->	
 	</div><!-- #primary -->
-<?php get_sidebar(); ?>
+<?php get_footer(); ?>

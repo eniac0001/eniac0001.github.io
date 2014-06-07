@@ -1,6 +1,6 @@
 <?php
 /**
- * Twenty Thirteen functions and definitions
+ * Simplest functions and definitions
  *
  * Sets up the theme and provides some helper functions, which are used in the
  * theme as custom template tags. Others are attached to action and filter
@@ -19,17 +19,17 @@
  * For more information on hooks, actions, and filters, @link http://codex.wordpress.org/Plugin_API
  *
  * @package WordPress
- * @subpackage Twenty_Thirteen
- * @since Twenty Thirteen 1.0
+ * @subpackage Simplest
+ * @since Simplest 0.1
  */
 
 /*
  * Set up the content width value based on the theme's design.
  *
- * @see twentythirteen_content_width() for template-specific adjustments.
+ * @see simplest_content_width() for template-specific adjustments.
  */
 if ( ! isset( $content_width ) )
-	$content_width = 604;
+	$content_width = 625;
 
 /**
  * Add support for a custom header image.
@@ -37,13 +37,13 @@ if ( ! isset( $content_width ) )
 /*require get_template_directory() . '/inc/custom-header.php';*/
 
 /**
- * Twenty Thirteen only works in WordPress 3.6 or later.
+ * Simplest only works in WordPress 3.6 or later.
  */
-if ( version_compare( $GLOBALS['wp_version'], '3.6-alpha', '<' ) )
-	require get_template_directory() . '/inc/back-compat.php';
+/*if ( version_compare( $GLOBALS['wp_version'], '3.6-alpha', '<' ) )
+	require get_template_directory() . '/inc/back-compat.php';*/
 
 /**
- * Twenty Thirteen setup.
+ * Simplest setup.
  *
  * Sets up theme defaults and registers the various WordPress features that
  * Twenty Thirteen supports.
@@ -55,7 +55,7 @@ if ( version_compare( $GLOBALS['wp_version'], '3.6-alpha', '<' ) )
  * @uses register_nav_menu() To add support for a navigation menu.
  * @uses set_post_thumbnail_size() To set a custom post thumbnail size.
  *
- * @since Twenty Thirteen 1.0
+ * @since Simplest 0.1
  */
 function twentythirteen_setup() {
 	/*
@@ -114,7 +114,7 @@ add_action( 'after_setup_theme', 'twentythirteen_setup' );
  * The use of Source Sans Pro and Bitter by default is localized. For languages
  * that use characters not supported by the font, the font can be disabled.
  *
- * @since Twenty Thirteen 1.0
+ * @since Simplest 0.1
  *
  * @return string Font stylesheet or empty string if disabled.
  */
@@ -155,7 +155,7 @@ function twentythirteen_fonts_url() {
 /**
  * Enqueue scripts and styles for the front end.
  *
- * @since Twenty Thirteen 1.0
+ * @since Simplest 0.1
  */
 function twentythirteen_scripts_styles() {
 	/*
@@ -193,7 +193,7 @@ add_action( 'wp_enqueue_scripts', 'twentythirteen_scripts_styles' );
  * Creates a nicely formatted and more specific title element text for output
  * in head of document, based on current view.
  *
- * @since Twenty Thirteen 1.0
+ * @since Simplest 0.1
  *
  * @param string $title Default title text for current view.
  * @param string $sep   Optional separator.
@@ -224,7 +224,7 @@ add_filter( 'wp_title', 'twentythirteen_wp_title', 10, 2 );
 /**
  * Register two widget areas.
  *
- * @since Twenty Thirteen 1.0
+ * @since Simplest 0.1
  */
 function twentythirteen_widgets_init() {
 	register_sidebar( array(
@@ -253,7 +253,7 @@ if ( ! function_exists( 'twentythirteen_paging_nav' ) ) :
 /**
  * Display navigation to next/previous set of posts when applicable.
  *
- * @since Twenty Thirteen 1.0
+ * @since Simplest 0.1
  */
 function twentythirteen_paging_nav() {
 	global $wp_query;
@@ -284,7 +284,7 @@ if ( ! function_exists( 'twentythirteen_post_nav' ) ) :
 /**
  * Display navigation to next/previous post when applicable.
 *
-* @since Twenty Thirteen 1.0
+* @since Simplest 0.1
 */
 function twentythirteen_post_nav() {
 	global $post;
@@ -315,7 +315,7 @@ if ( ! function_exists( 'twentythirteen_entry_meta' ) ) :
  *
  * Create your own twentythirteen_entry_meta() to override in a child theme.
  *
- * @since Twenty Thirteen 1.0
+ * @since Simplest 0.1
  */
 function twentythirteen_entry_meta() {
 	if ( is_sticky() && is_home() && ! is_paged() )
@@ -353,7 +353,7 @@ if ( ! function_exists( 'twentythirteen_entry_date' ) ) :
  *
  * Create your own twentythirteen_entry_date() to override in a child theme.
  *
- * @since Twenty Thirteen 1.0
+ * @since Simplest 0.1
  *
  * @param boolean $echo (optional) Whether to echo the date. Default true.
  * @return string The HTML-formatted post date.
@@ -382,7 +382,7 @@ if ( ! function_exists( 'twentythirteen_the_attached_image' ) ) :
 /**
  * Print the attached image with a link to the next attached image.
  *
- * @since Twenty Thirteen 1.0
+ * @since Simplest 0.1
  */
 function twentythirteen_the_attached_image() {
 	/**
@@ -450,7 +450,7 @@ endif;
  *
  * Falls back to the post permalink if no URL is found in the post.
  *
- * @since Twenty Thirteen 1.0
+ * @since Simplest 0.1
  *
  * @return string The Link format URL.
  */
@@ -462,51 +462,23 @@ function twentythirteen_get_link_url() {
 }
 
 /**
- * Extend the default WordPress body classes.
- *
- * Adds body classes to denote:
- * 1. Single or multiple authors.
- * 2. Active widgets in the sidebar to change the layout and spacing.
- * 3. When avatars are disabled in discussion settings.
- *
- * @since Twenty Thirteen 1.0
- *
- * @param array $classes A list of existing body class values.
- * @return array The filtered body class list.
- */
-function twentythirteen_body_class( $classes ) {
-	if ( ! is_multi_author() )
-		$classes[] = 'single-author';
-
-	if ( is_active_sidebar( 'sidebar-2' ) && ! is_attachment() && ! is_404() )
-		$classes[] = 'sidebar';
-
-	if ( ! get_option( 'show_avatars' ) )
-		$classes[] = 'no-avatars';
-
-	return $classes;
-}
-add_filter( 'body_class', 'twentythirteen_body_class' );
-
-/**
  * Adjust content_width value for video post formats and attachment templates.
  *
- * @since Twenty Thirteen 1.0
+ * @since Simplest 0.1
  */
-function twentythirteen_content_width() {
+function simplest_content_width() {
 	global $content_width;
 
 	if ( is_attachment() )
 		$content_width = 724;
-	elseif ( has_post_format( 'audio' ) )
-		$content_width = 484;
+
 }
-add_action( 'template_redirect', 'twentythirteen_content_width' );
+add_action( 'template_redirect', 'simplest_content_width' );
 
 /**
  * Add postMessage support for site title and description for the Customizer.
  *
- * @since Twenty Thirteen 1.0
+ * @since Simplest 0.1
  *
  * @param WP_Customize_Manager $wp_customize Customizer object.
  */
@@ -523,11 +495,22 @@ add_action( 'customize_register', 'twentythirteen_customize_register' );
  * Binds JavaScript handlers to make the Customizer preview
  * reload changes asynchronously.
  *
- * @since Twenty Thirteen 1.0
+ * @since Simplest 0.1
  */
 function twentythirteen_customize_preview_js() {
 	wp_enqueue_script( 'twentythirteen-customizer', get_template_directory_uri() . '/js/theme-customizer.js', array( 'customize-preview' ), '20130226', true );
 }
 add_action( 'customize_preview_init', 'twentythirteen_customize_preview_js' );
 
+
 remove_action('wp_head','wp_generator');
+// remove
+// <link rel="alternate" type="application/rss+xml" title="WOERWOSI &raquo; Feed" href="http://www.woerwosi.com/blog/?feed=rss2" />
+// <link rel="alternate" type="application/rss+xml" title="WOERWOSI &raquo; 评论Feed" href="http://www.woerwosi.com/blog/?feed=comments-rss2" />
+remove_action('wp_head','feed_links', 2);
+remove_action('wp_head','feed_links_extra', 3);
+// remove 
+// <link rel="EditURI" type="application/rsd+xml" title="RSD" href="http://www.woerwosi.com/blog/xmlrpc.php?rsd" />
+// <link rel="wlwmanifest" type="application/wlwmanifest+xml" href="http://www.woerwosi.com/blog/wp-includes/wlwmanifest.xml" /> 
+remove_action('wp_head','rsd_link');
+remove_action('wp_head','wlwmanifest_link');   
