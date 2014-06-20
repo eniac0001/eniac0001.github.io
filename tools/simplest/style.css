@@ -781,10 +781,6 @@ body {
 }
 
 .site-main {
-	position: absolute;
-	right: 0;
-	min-height: 100%;
-	width: 77%;
 	background: whitesmoke;
 	padding: 0px 40px 0px 40px;
 }
