@@ -1,4 +1,4 @@
-$(function(){
+(function($){
     (function manualInit () {
         var $sliderMd = $('.iframe-md[data-mdtype=slider]');
         var $menuMd = $('.iframe-md[data-mdtype=menu]');
@@ -181,4 +181,4 @@ $(function(){
             });
         }
     })();
-});
+})(jQuery);

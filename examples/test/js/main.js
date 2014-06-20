@@ -2,7 +2,7 @@
  * result-main.js
  */
 require.config({
-    baseUrl: '../files/js/',
+    baseUrl: 'js/',
     paths: {
         'menu':             'menu',
         'flexslider':       'flexslider',     // For running the widget slider in the <iframe>
