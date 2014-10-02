@@ -1,0 +1,375 @@
+html {
+	-webkit-font-smoothing: antialiased;
+}
+
+html, body {
+	height: 100%;
+	padding: 0px;
+	margin: 0px;
+}
+
+body {
+	overflow-y: hidden;
+	overflow-x: hidden;
+	font-family: Helvetica, 'Microsoft YaHei', Arial, sans-serif;
+	background-color: #1A3742;
+	background-size: cover;
+	background-position: top center;
+	background-attachment: fixed;
+	background-repeat: repeat-y;
+	color: #464e54;
+}
+
+a, a:visited, a:hover, a:active {
+    text-decoration: none;
+    color: #fff8e1;
+}
+
+/*section {
+	margin: 0;
+	padding: 0;
+	height: 100%;
+	text-align: center;
+	position: relative;
+	background-color: #E8E7EA;
+}*/
+
+#section0 {
+	background:#1A3742;
+	background-image: -webkit-gradient(linear, 0% 0%, 0% 100%, from(#1A9123), to(#51580F));
+	background-image: -webkit-linear-gradient(top, #1A9123, #51580F);
+	background-image: -moz-linear-gradient(top, #1A9123, #51580F);
+	background-image: -ms-linear-gradient(top, #1A9123, #51580F);
+	background-image: -o-linear-gradient(top, #1A9123, #51580F);
+}
+
+nav.main {
+	height: 60px;
+	position: absolute;
+	width: 100%;
+	bottom: 0px;
+	left: 0px;
+	z-index: 999;
+	padding: 0px;
+	margin: 0px;
+	text-align: center;
+}
+
+nav.main ul {
+	max-width: 550px;
+	margin-left: auto;
+	margin-right: auto;
+	zoom: 1;
+	display: block;
+	text-align: center;
+	padding: 0px 0px 0px 0px;
+	color: #E6E0CB;
+	letter-spacing: 1px;
+}
+
+nav.main li {
+   display:inline-block;
+   *display:inline; /*IE7*/
+   *zoom:1; /*IE7*/
+   margin-right: 20px;
+   padding-bottom: 0px;
+}
+
+nav.main a {
+	display: block;
+	color: #fff8e1;
+	text-transform: uppercase;
+	padding-top: 28px;
+	padding-bottom: 0px;
+	border-top: 2px solid transparent;
+   -o-transition:.5s;
+   -ms-transition:.5s;
+   -moz-transition:.5s;
+   -webkit-transition:.5s;
+}
+
+nav.main a:hover {
+	border-top: 2px solid #E6E0CB;
+}
+
+nav ul {
+	padding: 0px;
+	list-style: none;
+}
+#content {
+	position: absolute;
+	width: 600px;
+	height: 500px;
+	left: 50%;
+ 	top: 40%;
+  margin-left: -300px;
+  margin-top: -250px;
+	text-align: center;
+}
+
+header {
+	text-align: center;
+}
+
+article {
+	text-align: center;
+	background: #666;
+}
+
+aside {
+	text-align: center;
+	background: #999;
+}
+
+footer {
+	text-align: center;
+	background: #BBB;
+}
+
+.disable-hover, .disable-hover * {
+  pointer-events: none !important;
+}
+
+.center {
+	text-align: center;
+}
+
+@keyframes enterAnimLeft
+
+{
+
+  from {
+
+    left:-50px;
+
+  }
+
+  to {
+
+    left:0px;
+
+  }
+
+}
+
+@-webkit-keyframes enterAnimLeft /* Safari and Chrome */
+
+{
+
+  from {
+
+    left:-50px;
+
+  }
+
+  to {
+
+    left:0px;
+
+  }
+
+}
+
+@keyframes enterAnimBottom
+
+{
+
+  from {
+
+    bottom:-100px;
+
+  }
+
+  to {
+
+    bottom:0px;
+
+  }
+
+}
+
+@-webkit-keyframes enterAnimBottom /* Safari and Chrome */
+
+{
+
+  from {
+
+    bottom:-100px;
+
+  }
+
+  to {
+
+    bottom:0px;
+
+  }
+
+}
+
+@keyframes enterAnimRight
+
+{
+
+  from {
+
+    right:-100px;
+
+  }
+
+  to {
+
+    right:0px;
+
+  }
+
+}
+
+@-webkit-keyframes enterAnimRight /* Safari and Chrome */
+
+{
+
+  from {
+
+    right:-100px;
+
+  }
+
+  to {
+
+    right:0px;
+
+  }
+
+}
+
+@keyframes overlayAnimLeft
+
+{
+
+  from {
+
+    -webkit-transform: skew(45deg, 0deg);
+
+    -moz-transform: skew(45deg, 0deg);
+
+    transform: skew(45deg, 0deg);
+
+    opacity:0;
+
+    height:1px;
+
+    top:50%;
+
+  }
+
+  to {
+
+    -webkit-transform: skew(0deg, 0deg);
+
+    -moz-transform: skew(0deg, 0deg);
+
+    transform: skew(0deg, 0deg);
+
+    opacity:.7;
+
+    height:100%;
+
+    top:0;
+
+  }
+
+}
+
+
+@-webkit-keyframes overlayAnim /* Safari and Chrome */
+
+{
+
+  from {
+
+    -webkit-transform: skew(45deg, 0deg);
+
+    -moz-transform: skew(45deg, 0deg);
+
+    transform: skew(45deg, 0deg);
+
+    opacity:0;
+
+    height:1px;
+
+    top:50%;
+
+  }
+
+  to {
+
+    -webkit-transform: skew(0deg, 0deg);
+
+    -moz-transform: skew(0deg, 0deg);
+
+    transform: skew(0deg, 0deg);
+
+    opacity:.7;
+
+    height:100%;
+
+    top:0;
+
+  }
+
+}
+
+
+@keyframes coverAnim
+
+{
+
+  from {
+
+    -webkit-transform: rotateX(45deg);
+
+    transform: rotateX(45deg);
+
+    opacity:0;
+
+  }
+
+  to {
+
+    -webkit-transform: rotateX(0deg);
+
+    transform: rotateX(0deg);
+
+    opacity:1;
+
+  }
+
+}
+
+
+
+@-webkit-keyframes coverAnim /* Safari and Chrome */
+
+{
+
+  from {
+
+    -webkit-transform: rotateX(45deg);
+
+    transform: rotateX(45deg);
+
+    opacity:0;
+
+  }
+
+  to {
+
+    -webkit-transform: rotateX(0deg);
+
+    transform: rotateX(0deg);
+
+    opacity:1;
+
+  }
+
+}
