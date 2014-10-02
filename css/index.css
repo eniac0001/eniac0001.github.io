@@ -12,7 +12,7 @@ body {
 	overflow-y: hidden;
 	overflow-x: hidden;
 	font-family: Helvetica, 'Microsoft YaHei', Arial, sans-serif;
-	background-color: #1A3742;
+	background-color: #1A9123;
 	background-size: cover;
 	background-position: top center;
 	background-attachment: fixed;
@@ -24,15 +24,6 @@ a, a:visited, a:hover, a:active {
     text-decoration: none;
     color: #fff8e1;
 }
-
-/*section {
-	margin: 0;
-	padding: 0;
-	height: 100%;
-	text-align: center;
-	position: relative;
-	background-color: #E8E7EA;
-}*/
 
 #section0 {
 	background:#1A3742;
